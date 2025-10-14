@@ -21,9 +21,12 @@ sau khi test ok. can dua code moi nhat ve master/main
 
 merge
 
-this is ok
+this is demo
+
 B push ok
 de merge code
     - checkout sang main
     - merge from feature/create-order-page into main
     - push
+
+A pushed
