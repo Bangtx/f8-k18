@@ -21,8 +21,8 @@ sau khi test ok. can dua code moi nhat ve master/main
 
 merge
 
-this is test
-
+this is ok
+B push
 de merge code
     - checkout sang main
     - merge from feature/create-order-page into main
