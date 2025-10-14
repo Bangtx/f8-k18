@@ -22,7 +22,7 @@ sau khi test ok. can dua code moi nhat ve master/main
 merge
 
 this is ok
-B push
+B push ok
 de merge code
     - checkout sang main
     - merge from feature/create-order-page into main
