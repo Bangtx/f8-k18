@@ -1,0 +1,22 @@
+khi tao project moi
+    - main
+    - master
+
+du an da di vao hoat dong on dinh
+-> vi main / master la code chay on dinh
+    khi sua code, co the phat sinh loi
+
+-> giai phap: tao nhanh moi, code tren nhanh moi
+    neu tester ok -> merge code tu nhanh moi ve main / master
+
+branch: nhanh
+
+vd tao nhanh moi co ten la feature/create-order-page
+
+exp: dang o nhanh main, muon nhay sang feature/create-order-page de code
+
+checkout feature/create-order-page
+
+sau khi test ok. can dua code moi nhat ve master/main
+
+merge
