@@ -37,3 +37,20 @@
  3. commit
  4. push
 
+ team co 3 members
+    - 2025-10-14 08:50 A vs B cung nhan task checkout tu main
+    - A order, B payment
+    - A tao 1 branch feature/create-order
+    - B tao 1 branch feature/create-payment
+    - luc nay feature/create-order y het feature/create-payment
+    - den ngay 2025-10-15 11:00 A code + test xong
+    - leader approved, merge code ok
+    - B van code hung huc
+    - 2025-10-15 14:00 feature/create-order dc merger vao main
+    - dong do 24 file note:
+        + A this is test -> this is demo
+        + B this is test -> this is ok
+
+    - code master: 24 file note la this is demo
+    - 2025-10-15 8:00 B code xong test ok
+    - 2025-10-15 10:00 B merge code master/main ve -> die
