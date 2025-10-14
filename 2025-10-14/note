@@ -17,3 +17,18 @@ protocol: https
 domain: tiki.com.vn/
 path: products
 query string: search_str=test
+
+
+devtools
+- f12 to open
+- tabs
+    + elements
+        kien tra cac phan tu html
+    + console
+        se noi ky hon khi hoc den js(javascript)/ts(typescript)
+    + networks
+        check requests/responses
+        su dung nhieu khi hoc API
+    + application
+        hoc o cuoi phan js(javascript)
+
