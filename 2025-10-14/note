@@ -1,0 +1,19 @@
+https://docs.google.com/presentation/d/1uyjx6egs281up0ZzAN9CYCKU8BCFia1d7s19z8ulVu8/edit?slide=id.p#slide=id.p
+
+group 1: presentation/d/1uyjx6egs281up0ZzAN9CYCKU8BCFia1d7s19z8ulVu8/editn -> path
+group 2: slide=id.p -> query string
+
+
+https://docs.google.com/edit?slide=id.p#slide=id.p
+
+
+https://shoppe.vn/?product=quan-ao
+
+https://shoppe.vn/logout
+
+https://tiki.com.vn/products/?search_str=test#top
+
+protocol: https
+domain: tiki.com.vn/
+path: products
+query string: search_str=test
