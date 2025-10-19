@@ -1,0 +1,66 @@
+ve cau tao
+    - the du: day du cap the dong-mo
+        exp: html, body
+    - the rong: ko co the dong
+        exp: meta
+
+
+ve tinh chat
+    - block
+        la 1 block chiem 100% viewport
+        exp:
+            div
+            h1 -> h6
+            p
+    - inline
+        dung den dau thi rong den day, neu dai hon viewport -> xuong dong
+        exp:
+            span
+            br
+            img
+
+
+
+SEO:
+    - ngu nghia
+    div, span ko co nghia gi ve seo
+
+
+div:
+    ko co y nghia ve SEO, ko co ngu nghia
+    gom nhom cac thanh phan lai voi nhau
+
+
+span:
+    ko co ngu nghia
+
+
+
+heading:
+    h1, h2, h3, h4, h5, h6 la cac the block
+    nhan manh thong tin
+        h1: manh nhat, 1 page chi nen co duy nhat 1 the h1
+        co the co nhieu the h2, h3, h4, h5, h6
+        ko dc nhay coc the
+            vd: h1 -> h3 (sai), h3 -> h6 (sai)
+
+
+
+p:
+    la the block, su dung de trien khai 1 doan van ban, co khoang cach nhat dinh
+
+br:
+    xuong dong trong 1 doan van, la the inline, ko co ngu nghia j
+    -> chi nen nam trong the p
+
+img:
+    hien thi anh, the rong (self-closing)
+    src: duong dan anh
+    alt: goi y hinh anh (neu anh loi thi hien alt)
+    width: chieu rong anh
+    height: chieo cao anh
+    title: tieu de anh
+
+
+
+
