@@ -165,3 +165,138 @@ img:
     title: tieu de anh
 
 
+----------------------------------------------------------------
+Buoi 3: 2025-10-21
+----------------------------------------------------------------
+- Cac the html
+- Duong dan tuong doi / tuyet doi
+- Table (optinal)
+
+img:
+    khoang trang trai-phai: do xuong dong trong code
+    khoang trang tren-duoi: do img la 1 the inline -> text
+        neu muon lam mat khoang trang -> dua ve ko phai inline (css)
+
+
+f8-k19
+    │
+    │
+    ├►2025-10-14
+    │
+    │
+    ├►2025-10-18
+    │     │
+    │     │
+    │     └► index.html (*)
+
+
+f8-k18 (root) -> /
+    │
+    │
+    ├►2025-10-14
+    │
+    │
+    ├►2025-10-18
+    │     │
+    │     │
+    │     └► index.html (*)
+    │
+    │
+    │
+    ├►2025-10-21
+    │     │
+    │     │
+    │     ├► images
+    │     │    │
+    │     │    │
+    │     │    └► baseline.png (**)
+    │     │
+    │     │
+    │     │
+    │     │► test.png
+    │     │
+    │     │
+    │     └► img.html  (coder)
+    │
+    │
+    │
+    └► baseline.png
+
+exp:
+    toi dang dung o 2025-10-21/img.html, muon choc den
+        - f8-k18/baseline.png: ../baseline.png   --> tuong doi
+        - /baseline.png  --> tuyet doi
+    toi dang dung o 2025-10-21/images/index.html, muon choc den
+        - f8-k18/baseline.png: ../../baseline.png
+        - /baseline.png
+
+    dung tai 2025-10-18/index.html, muon chi den 2025-10-21/images/baseline.png
+        src=???
+
+        Duong: ../2025-10-21/images/baseline/png -> Dung
+        Tien be, Dong, bach, Dai, , Ngan, Son, A Cuong, Hoang: like Duong
+        A HA: ../../2025-10-21/images/baseline/png
+        C Binh, Hinh, Huy: like a Ha
+        hUONG: 2025-10-21/images/baseline/png
+
+        - /2025-10-21/images/baseline.png --> tuyet doi
+
+
+f8-k18 (root) -> /
+    │
+    │
+    ├►2025-10-14
+    │
+    │
+    ├►2025-10-18
+    │     │
+    │     │
+    │     └► index.html (*)
+    │
+    │
+    │
+    ├►2025-10-21
+    │     │
+    │     │
+    │     ├► images
+    │     │    │
+    │     │    │
+    │     │    └► baseline.png (**)
+    │     │
+    │     └► src
+    │           │
+    │           │
+    │           │► test.png
+    │           │
+    │           │
+    │           └► img.html  (coder)
+    │
+    │
+    │
+    └► baseline.png
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
