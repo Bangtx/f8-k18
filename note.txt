@@ -276,17 +276,48 @@ f8-k18 (root) -> /
     └► baseline.png
 
 
+a:
+    the dieu huong
+    attribute:
+        href: required
+    the inline
+
+<p><a></a></p> -> a la the con truc tiep cua p
+p
+    a
+
+html
+<p>de hoc lap trinh tot thi hay xem o <a href="https://youtube.com/">day</a></p>
+
+pug
+p de hoc lap trinh tot thi hay xem o
+    a(href="https://youtube.com/") day
 
 
+<p>
+    <span>
+        <a></a>
+    </span>
+</p>
+
+-> a ko phai con truc tiep
 
 
+ul/li
+    the danh sach
+    la the block
+
+ol/li -> order (sapxep)
+    the danh sach da dc sap xep
+    la the block
 
 
-
-
-
-
-
+----------------------------------------------------------------
+Buoi 3: 2025-10-21
+----------------------------------------------------------------
+- i, b, strong...
+- table
+- form/input
 
 
 
