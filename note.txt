@@ -319,8 +319,30 @@ Buoi 3: 2025-10-21
 - table
 - form/input
 
+i:
+    in nghieng, ko co ngu nghia
+    the du
 
+em:
+    giong the i ve hinh thuc
+    co y nghia nhan manh
 
+b:
+    in dam, ko co ngu nghia
+    the du
+
+strong:
+    giong the b ve hinh thuc
+    co y nghia nhan manh
+
+mark:
+    boi dam
+
+ins:
+    gach chan
+
+li khi nam tring the i, mang 1 so tinh chat cua the cha -> so 3 in nghieng
+    -> css
 
 
 
