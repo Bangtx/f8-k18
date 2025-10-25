@@ -313,7 +313,7 @@ ol/li -> order (sapxep)
 
 
 ----------------------------------------------------------------
-Buoi 3: 2025-10-21
+Buoi 5: 2025-10-21
 ----------------------------------------------------------------
 - i, b, strong...
 - table
@@ -344,12 +344,29 @@ ins:
 li khi nam tring the i, mang 1 so tinh chat cua the cha -> so 3 in nghieng
     -> css
 
+table
+    th: table header
+    hang tr: table row
+    cot td: table data
+
+    border="1" cellspacing="0" width="100%" -> ko dung -> css
+    algin: center, left, ritht
+    colspan: gop cot
+    rowspan: gop hang
+
+----------------------------------------------------------------
+Buoi 6: 2025-10-28
+----------------------------------------------------------------
+table:
+    printer
+form / input
+css
 
 
-
-
-
-
+----------------------------------------------------------------
+Buoi 7: 2025-11-01
+----------------------------------------------------------------
+test html (optional)
 
 
 
