@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <form action="https://api-gateway.fullstack.edu.vn/action_page.php" method="post">
+    <label>Username</label>
+    <input placeholder="username" value="bangtx" type="text" name="user">
+    <br/>
+    <label>Password</label>
+    <input placeholder="password" value="12345678" type="password" name="pass">
+    <br/>
+    <label>Age</label>
+    <input placeholder="age" type="number" name="age" value="20">
+    <br/>
+    <label>Email</label>
+    <input placeholder="admin@test.com" type="email" name="mail" value="bangtx@test.com">
+    <br/>
+
+    <span>ban thich gi</span>
+    <br>
+    <label>thit meo</label><input type="checkbox" name="foot[]" value="cat">
+    <label>thit cho</label><input type="checkbox" name="foot[]" value="dog">
+    <label>thit de</label><input type="checkbox" name="foot[]" value="goat">
+
+    <span>gioi tinh</span>
+    <label>nam</label><input type="radio" name="gender" value="men">
+    <label>nu</label><input type="radio" name="gender" value="female">
+    <label>khac</label><input type="radio" name="gender" value="other">
+    <br>
+
+    <span>ban lam nghe gi</span>
+    <select name="address">
+      <option value="it">it</option>
+      <option value="doctor">bac si</option>
+      <option value="teacher">giap vien</option>
+    </select>
+    <input type="submit">
+    <br/>
+  </form>
+</body>
+</html>

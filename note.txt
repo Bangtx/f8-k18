@@ -363,6 +363,43 @@ form / input
 css
 
 
+form / button / input / label / select - option
+
+input
+    placeholder: goi y xem o day nhap cai j
+    value: gia tri se dc dien mac dinh
+    name:
+        ten cua input
+    type:
+        text: type mac dinh
+        password: hien thi * thay vi raw value (gia tri tho)
+        number: nhap so
+        email: nhap email, check co '@' ko
+        submit: nut bam, khi bam vai day thi verify dc email
+
+form:
+    method: phuong thuc (post/get/put/patch)
+    action: hanh dong
+
+
+dieu kien:
+    - the form phai co action + method neu ko truyen method -> mac dinh la method GET
+    - input type la submit
+hanh donG:
+    khi ban nut submit thi du lieu se dc gui den link trong action voi method da dc dinh nghia
+
+get: du lieu dc gui qua url
+    han che
+        - limit (tuy trinh duyet)
+        - kem bao mat hon
+    -> method mac dinh cua trinh duyet
+post / put / patch: du lieu dc gui ko qua url
+
+select-option
+    hien thi 1 ds chon san
+    neu the option ko co value thi value se la txt hien thi trong the option
+    neu co value, thi gia tru chinh la value
+
 ----------------------------------------------------------------
 Buoi 7: 2025-11-01
 ----------------------------------------------------------------
