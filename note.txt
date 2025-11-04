@@ -413,3 +413,74 @@ test html (optional)
 
 
 
+----------------------------------------------------------------
+Buoi 8: 2025-11-04
+----------------------------------------------------------------
+css: lam dep cho trang web
+    co 3 cach viet css
+        - inline css: viet trong attribute style
+        - internal: viet css trong cap the <style></style>
+        - external: viet vao file .css ben ngoai
+
+    selector {
+        css code
+    }
+
+    selector co the la ten the (h1, h2, h3, ....)
+
+
+    style cua 1 the se bi anh huong boi nhieu cho
+        - inline
+        - internal
+        - external
+
+    muc do anh huong ti le nghich vs do bao phu
+
+    -> do uu tien:
+        inline > internal > external
+    -> do bao phu:
+        inline < internal < external
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
