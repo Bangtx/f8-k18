@@ -400,6 +400,12 @@ select-option
     neu the option ko co value thi value se la txt hien thi trong the option
     neu co value, thi gia tru chinh la value
 
+css
+    tat ca cac the html deu co css mac dinh
+    co 3 cach viet css
+       - inline css: viet trong attribute style
+
+
 ----------------------------------------------------------------
 Buoi 7: 2025-11-01
 ----------------------------------------------------------------
