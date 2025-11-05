@@ -426,7 +426,10 @@ css: lam dep cho trang web
         css code
     }
 
-    selector co the la ten the (h1, h2, h3, ....)
+    selector:
+        - co the la ten the (h1, h2, h3, ....)
+        - id: ma dinh danh
+        - class: lop
 
 
     style cua 1 the se bi anh huong boi nhieu cho
@@ -441,7 +444,30 @@ css: lam dep cho trang web
     -> do bao phu:
         inline < internal < external
 
+    truong hoc f88
 
+    - lop k18
+        - dong
+        - son
+        - hinh
+        - huong
+        - tien (be) -> 01234
+        - tien (lon) -> 12345
+    - lop k17
+        - son
+        - nam
+        - phong
+    - lop k16
+        - nam
+        - phong
+        - minh
+
+    do bao phu: ten the > class > id
+    do uu tien: ten the < class < id
+
+
+    .parent ul -> tat ca cac the con/chau/chat ... deu bi anh huong
+    .parent > ul -> chi cac the con truc tiep bi anh huong
 
 
 

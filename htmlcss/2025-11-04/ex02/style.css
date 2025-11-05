@@ -1,0 +1,18 @@
+ul ul > li > ul {
+    color: red;
+}
+
+/*
+   ul con truc tiep cua ul
+
+   ul (dong 10, 14, 17)
+        ul (14, 17)
+            > li (15, 21, 18, 19)
+                   > ul (17)
+
+exp01
+    ul (dong 10, 14, 17, 24)
+        ul (dong 14, 17, 24)
+            > li (dong 15, 22, 18, 19, 25, 26)
+                 > ul (17, 24)
+*/
