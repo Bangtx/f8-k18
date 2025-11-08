@@ -18,3 +18,7 @@ input[name='mode']:checked ~ p {
 h1:hover {
     color: red;
 }
+input[type="checkbox"]#checkbox1:checked + span {
+    border-color: red;
+    background-color:red;
+}
