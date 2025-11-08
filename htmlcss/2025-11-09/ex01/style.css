@@ -1,0 +1,20 @@
+/*h1, p {*/
+/*    color: red;*/
+/*}*/
+
+/*h1 + p + p + p {*/
+/*    color: red;*/
+/*}*/
+
+h1 ~ p {
+    color: red;
+}
+input[name="name"] {
+    color: red;
+}
+input[name='mode']:checked ~ p {
+    color: red;
+}
+h1:hover {
+    color: red;
+}

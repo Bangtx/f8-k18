@@ -470,18 +470,38 @@ css: lam dep cho trang web
     .parent > ul -> chi cac the con truc tiep bi anh huong
 
 
+----------------------------------------------------------------
+Buoi 9: 2025-11-08
+----------------------------------------------------------------
+
+selector
 
 
+h1, p {
+    color: red;
+}
+
+-> h & p co chung css
+
+h1 + p: p dung canh h
 
 
+h1 ~ p {
+    color: red;
+}
+-> p cung cap, dung sau h
 
+input[name="name"] {
+    color: red;
+}
+-> nhung css co "name" la "name"
 
-
-
-
-
-
-
+de bai:
+    co 1 radio btn red, green, yellow
+    <p>doan van ...</p>
+    check red -> text do
+    check green -> green text
+    ....
 
 
 
