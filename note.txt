@@ -504,6 +504,17 @@ de bai:
     ....
 
 
+em: Đơn vị đo độ phần trăm của font-size của phần tử cha.
+rem: Đơn vị đo độ phần trăm của font-size của phần tử gốc (thường là phần tử <html>).
+
+background
+
+
+----------------------------------------------------------------
+Buoi 10: 2025-11-11
+----------------------------------------------------------------
+first child, last-child, nth-child, nth-of-type .....
+padding, margin, border, box model
 
 
 
