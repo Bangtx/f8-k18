@@ -514,6 +514,7 @@ background
 Buoi 10: 2025-11-11
 ----------------------------------------------------------------
 first child, last-child, nth-child, nth-of-type .....
+background
 padding, margin, border, box model
 
 

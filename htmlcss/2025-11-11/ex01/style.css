@@ -1,0 +1,11 @@
+.box {
+    width: 800px;
+    height: 500px;
+    background-color: #62e32f;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP3RccHRaAwqpsPK_eqZlD0j1AARXv9s19jQ&s");
+    background-repeat: no-repeat;
+    /*background-position: 100px 50px;*/
+    background-size: contain;
+    /*background-size: cover;*/
+    /*background: red url("");*/
+}
