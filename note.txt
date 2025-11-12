@@ -517,16 +517,33 @@ first child, last-child, nth-child, nth-of-type .....
 background
 padding, margin, border, box model
 
+background = padding + content
+
+cac the luon co cac thanh phan
+    - content
+    - border: boc ngoai content
+    - padding: phan dem nam gua content & border, ko nhan so am
+    - margin: nam ngoai border, khoanh cach giua cac border
 
 
+box1: margin-bottom: 10px
+box2: margin-top: 10px  -> 10px
+
+box1: margin-bottom: 20px
+box2: margin-top: 30px  -> 30px
+
+box1: margin-bottom: -20px
+box2: margin-top: 30px  -> 10px
+
+box1: margin-bottom: -20px
+box2: margin-top: -30px  -> -20px
 
 
-
-
-
-
-
-
+----------------------------------------------------------------
+Buoi 10: 2025-11-15
+----------------------------------------------------------------
+text center ....
+padding, margin, border, box model -> inline
 
 
 
