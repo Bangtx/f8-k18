@@ -546,9 +546,12 @@ text center ....
 padding, margin, border, box model -> inline
 
 
+text-align: center -> ap dung cho nhung phan tu ma phan content con du cho de text can giua
 
-
-
+box-sizing:
+    content-box: width = connet
+    border-box: width = content + padding + border
+        -> tai vi content, padding nam ben trong border
 
 
 
