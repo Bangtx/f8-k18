@@ -10,48 +10,52 @@
 <label for="is-open-popup">open popup</label>
 <input id="is-open-popup" type="checkbox" hidden="">
 
+
 <div class="register-popup">
-  <label for="is-open-popup" class="close-btn">&times</label>
+  <div class="overlay"></div>
+  <div class="register-popup--content">
+    <label for="is-open-popup" class="close-btn">&times</label>
 
 
-  <div class="register-popup--title">Dang ki tu van</div>
+    <div class="register-popup--title">Dang ki tu van</div>
 
-  <div class="text-field">
-    <input type="text" placeholder="Tran Hung Dao">
-  </div>
+    <div class="text-field">
+      <input type="text" placeholder="Tran Hung Dao">
+    </div>
 
-  <div class="text-field">
-    <input type="text" placeholder="0123456789">
-  </div>
+    <div class="text-field">
+      <input type="text" placeholder="0123456789">
+    </div>
 
-  <div class="text-field">
-    <input type="email" placeholder="example@gmail.com">
+    <div class="text-field">
+      <input type="email" placeholder="example@gmail.com">
 
-    <div class="info-msg">
-      <div class="msg-box">
-        Day la msg. Hello anh em? Day la msg. Hello anh em?
+      <div class="info-msg">
+        <div class="msg-box">
+          Day la msg. Hello anh em? Day la msg. Hello anh em?
+        </div>
+        <div class="triangle"></div>
       </div>
-      <div class="triangle"></div>
     </div>
-  </div>
 
-  <div class="course-list">
-    <span>Khoa Hoc Quan tam</span>
-    <div class="course-list--option">
-      <input id="html-css" type="checkbox" name="course" value="HTML&CSS">
-      <label for="html-css">HTML&CSS</label>
+    <div class="course-list">
+      <span>Khoa Hoc Quan tam</span>
+      <div class="course-list--option">
+        <input id="html-css" type="checkbox" name="course" value="HTML&CSS">
+        <label for="html-css">HTML&CSS</label>
+      </div>
+      <div class="course-list--option">
+        <input id="javascript" type="checkbox" name="course" value="Javascript">
+        <label for="javascript">Javascript</label>
+      </div>
+      <div class="course-list--option">
+        <input id="reactjs" type="checkbox" name="course" value="Javascript">
+        <label for="reactjs">ReactJs</label>
+      </div>
     </div>
-    <div class="course-list--option">
-      <input id="javascript" type="checkbox" name="course" value="Javascript">
-      <label for="javascript">Javascript</label>
-    </div>
-    <div class="course-list--option">
-      <input id="reactjs" type="checkbox" name="course" value="Javascript">
-      <label for="reactjs">ReactJs</label>
-    </div>
-  </div>
 
-  <button>Dang Ky Tu Van</button>
+    <button>Dang Ky Tu Van</button>
+  </div>
 </div>
 
 </body>
