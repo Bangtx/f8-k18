@@ -540,7 +540,7 @@ box2: margin-top: -30px  -> -20px
 
 
 ----------------------------------------------------------------
-Buoi 10: 2025-11-15
+Buoi 11: 2025-11-15
 ----------------------------------------------------------------
 text center ....
 padding, margin, border, box model -> inline
@@ -555,10 +555,21 @@ box-sizing:
 
 
 
+object-fit:
+    fill: la mac dinh, resize
+    cover:
+        800x530
+        khi width cua the img > width cua anh
+            => anh tu scale ngang, chieu cao bi thua an di
+        khi width cua the img < width cua anh
+            => giu chieu cao, chieu ngang an di
+    contain:
+        luon giu chieu ngang, cao
 
-
-
-
-
+----------------------------------------------------------------
+Buoi 12: 2025-11-18
+----------------------------------------------------------------
+thuoc tinh display (inline, block, inline-block)
+position
 
 
