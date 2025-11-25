@@ -33,3 +33,24 @@
     color: #e18d00;
     padding: 10px;
 }
+
+.header-bar nav li:hover {
+    background-color: #ffe7c3;
+}
+
+.header-bar nav li:hover > ul {
+    display: block;
+}
+
+.header-bar nav li ul {
+    display: none;
+    position: absolute;
+    background-color: #ffe7c3;
+    top: 30px;
+}
+
+.header-bar nav li ul li {
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
