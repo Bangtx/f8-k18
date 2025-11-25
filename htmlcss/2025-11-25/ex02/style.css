@@ -7,11 +7,29 @@
     border-radius: 5px;
 }
 
+.header-bar {
+    border-bottom: 1px solid #ccc;
+}
+
+.header-bar .header-bar--content {
+    width: 600px;
+    margin: auto;
+    position: relative;
+}
+
+.header-bar nav {
+    position: absolute;
+    right: 0;
+    top: 16px;
+}
+
 .header-bar nav ul li {
     list-style: none;
+    display: inline-block;
 }
 
 .header-bar nav a {
     text-decoration: none;
     color: #e18d00;
+    padding: 10px;
 }
