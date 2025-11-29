@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter, sans-serif;
+}
+.header-bar img {
+    border-radius: 5px;
+}
+
+.header-bar {
+    border-bottom: 1px solid #ccc;
+}
+
+.header-bar .header-bar--content {
+    max-width: 600px;
+    margin: auto;
+    /*display: inline-block;*/
+}
+
+.header-bar nav {
+    display: inline-block;
+    /*margin: 10px;*/
+    margin-left: 200px;
+}
+
+.header-bar img {
+    display: inline-block;
+}
+
+.header-bar nav ul li {
+    list-style: none;
+    display: inline-block;
+}

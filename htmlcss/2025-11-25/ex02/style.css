@@ -12,7 +12,7 @@
 }
 
 .header-bar .header-bar--content {
-    width: 600px;
+    max-width: 600px;
     margin: auto;
     position: relative;
 }
