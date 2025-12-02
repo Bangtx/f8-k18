@@ -587,13 +587,61 @@ Buoi 15: 2025-11-29
 ----------------------------------------------------------------
 On tap
 
+flex box
+
+display: flex
+-> css cho cho the cha
+    khac inline-block (css cho chinh the do)
+
+main axis, cross axis
+
+flex-direction: mac dinh la row
+
+    ┌─────────────────────────────┬────────────────────────────┐
+    │display: flex                │                            │
+    │flex-direction: row          │                            │
+    │                             │cross                       │
+    │                             │                            │
+    │                             │                            │
+    ├─────────────────────────────┼───────────────────────────►│
+    │        main                 │                            │
+    │                             │                            │
+    │                             │                            │
+    │                             │                            │
+    │                             │                            │
+    └─────────────────────────────▼────────────────────────────┘
 
 
 
+    ┌─────────────────────────────┬────────────────────────────┐
+    │display: flex                │                            │
+    │flex-direction: column       │                            │
+    │                             │main                        │
+    │                             │                            │
+    │                             │                            │
+    ├─────────────────────────────┼───────────────────────────►│
+    │      cross                  │                            │
+    │                             │                            │
+    │                             │                            │
+    │                             │                            │
+    │                             │                            │
+    └─────────────────────────────▼────────────────────────────┘
 
+flex-wrap: wrap
+    -> xuong dong moi neu het cho
 
+align-items
+    -> can theo cross axis
 
+flex-shrink:
+    viet trong the con
+    cho phep phan tu co dc co lai hay ko
 
+flex-grow:
+    viet trong the con
+    cho phep phan tu dc gian ra hay ko
+
+flex-shrink + flex-grow uu tien cao hon width
 
 
 

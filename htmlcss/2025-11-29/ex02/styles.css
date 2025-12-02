@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    border: 10px solid orange;
+    justify-content: space-evenly;
+}
+
+#box-1 {
+    /*flex-shrink: 2;*/
+    flex-grow: 0;
+}
+
+.box {
+    /*background-color: #349e0f;*/
+    /*flex-shrink: 0;*/
+    flex-grow: 1;
+    border: 10px solid #349e0f;
+    width: 100px;
+    height: 100px;
+    color: #349e0f;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

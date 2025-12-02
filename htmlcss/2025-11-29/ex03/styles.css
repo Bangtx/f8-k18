@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter, sans-serif;
+}
+.header-bar img {
+    border-radius: 5px;
+}
+
+.header-bar {
+    border-bottom: 1px solid #ccc;
+}
+
+.header-bar .header-bar--content {
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+.header-bar nav ul {
+    display: flex;
+}
+.header-bar nav ul li {
+    list-style: none;
+    padding: 10px;
+    border: 1px solid green;
+}
