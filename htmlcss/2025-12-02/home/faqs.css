@@ -1,0 +1,45 @@
+.faq {
+    margin-top: 100px;
+    display: flex;
+}
+
+.faq--title {
+    width: 33%;
+    padding: 100px 60px 0 100px;
+}
+
+.faq--questions {
+    width: 67%;
+    margin: 100px 100px 0 60px;
+}
+
+.faq--title h2 {
+    font-size: 48px;
+    line-height: 120%;
+}
+
+.faq--title p {
+    font-size: 18px;
+    line-height: 150%;
+    margin-bottom: 50px;
+}
+
+.faq--title a {
+    font-size: 18px;
+    line-height: 150%;
+    padding: 18px 24px;
+    border: 1px solid #f1f1f3;
+    display: inline-block;
+    border-radius: 12px;
+}
+
+.faq--questions--title {
+    font-size: 20px;
+    line-height: 150%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.faq--questions--answer--content {
+    margin: 50px auto;
+}
