@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Title</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,10 +37,21 @@
     <div id="header--action">
       <button>Sign Up</button>
       <button>Login</button>
-      <button>menu</button>
+      <label for="menu-btn">
+        menu
+      </label>
     </div>
   </div>
 </header>
+
+<input id="menu-btn" type="checkbox">
+
+<label for="menu-btn" class="overlay">
+  <div class="side-bar">
+    <label for="menu-btn">close</label>
+  </div>
+</label>
+
 
 <main>
 <!--  Benefits -->
