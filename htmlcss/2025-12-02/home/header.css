@@ -28,7 +28,7 @@ header {
 }
 
 #header-bottom {
-    width: 1600px;
+    max-width: 1600px;
     margin: auto;
     display: flex;
     align-items: center;
@@ -53,4 +53,19 @@ header {
 #header-bottom ul li {
     list-style: none;
     padding: 14px 24px;
+}
+
+#header--action button:last-child {
+    display: none;
+}
+
+@media screen and (max-width: 991px) {
+    #header-bottom nav {
+        display: none;
+    }
+
+    #header--action button:last-child {
+        display: inline-block;
+    }
+
 }
