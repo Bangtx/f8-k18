@@ -1,0 +1,27 @@
+.best-seller {
+    display: flex;
+    gap: 16px;
+}
+
+.best-seller__ads {
+    display: flex;
+    flex-direction: column;
+}
+
+.best-seller__ads img {
+    border-radius: 16px;
+}
+
+.best-seller__gallery__products {
+    display: flex;
+}
+
+
+.product-item__image {
+    background-color: red;
+    width: 100%;
+}
+
+.product-item__image img {
+    width: 100%;
+}
