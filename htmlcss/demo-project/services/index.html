@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<style>
+    .transaction {
+        display: flex;
+        align-items: center;
+        border: 1px solid #FF00FF;
+        justify-content: space-between;
+        height: 64px;
+        margin: auto;
+    }
+
+    .primary {
+        position: relative;
+        width: 500px;
+        background-color: #62e32f;
+        z-index: 10;
+
+    }
+
+    .secondary {
+        width: 400px;
+        position: relative;
+        top: -10px;
+        z-index: 8;
+    }
+</style>
+
+<body>
+
+<div style="position: relative">
+  <div class="transaction primary">
+    <div>
+      <div>Transaction</div>
+      <div>Joel kenley</div>
+    </div>
+    <div>68$</div>
+  </div>
+
+  <div class="transaction secondary">
+    <div>
+      <div>Transaction</div>
+      <div>Joel kenley</div>
+    </div>
+    <div>68$</div>
+  </div>
+</div>
+
+</body>
+</html>
