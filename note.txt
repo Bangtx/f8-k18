@@ -645,6 +645,152 @@ flex-shrink + flex-grow uu tien cao hon width
 
 
 -----------
+Buoi 20: 2025-12-27
+
+JS: javascript la 1 ngon ngu lap trinh
+ - ra doi voi muc dich lam FE
+ hien tai JS co the lam FE, BE, CICD, AI
+
+JS:
+- uu diem: trien khai nhanh, de code
+- nhuoc diem:
+    + ko tuong minh -> kho bao tri
+    + khi code sai -> ko biet ngay dc
+    + ko ho tro lap trinh huong doi tuong
+    (Lom com)
+
+TS (typescript) ra doi de giai quyet hau het nhuoc diem
+    -> co nhung net tuong dong vs Java
+
+
+in gia tri ra man hinh terminal(console)
+-> console.log
+
+*Bien - variable*
+    bien dung de luu tam thoi gia tri nao do
+
+    const/let/var <ten bien> = <gia tri>
+
+    <ten bien> ko dc dat trung nhau
+
+phan biet const/let/var
+    https://cdn.hashnode.com/res/hashnode/image/upload/v1632133457743/KB7KZ1RiB.png?auto=compress,format&format=webp
+
+
+let a = 1 -> declare "a" variable and assign value 1
+          -> khai bao bien a & gan gia tri 1 cho bien a
+
+a = 2 -> update value of "a"
+      -> cap nhat gia tri 2 cho bien a
+
+*data type*
+number
+    - int: 1, 2, 3
+    - float: 1.2, 3.14
+bool
+    is/are/have/has + adj/N
+    exp:
+        - isNumber = true/false
+
+-- char:
+--     exp: "a", "b"
+string
+    exp: "ok anh em"
+object
+    - array [matrix]
+        exp:
+            [1, 2, 3]
+            [
+                [1, 2, 3],
+                [3, 2, 1]
+            ]
+    - dictionary (key - value)
+        exp:
+            {
+                "hello": "xin chao",
+                "ok": "duoc"
+            }
+
+Date object
+Undefined
+Null
+
+*Ep kieu - Type casting*
+const a = 1000
+convert
+    1000 -> "1000" -> ok
+    "1000" -> 1000 -> ko | ok
+
+
+trong toan logic:
+    - chi dung hoac sai
+
+    sai: false -> 0
+    dung: true (ko phai false) -> ko phai 0
+
+    sai: false -> ""
+
+
+ number          string         bool          status
+
+  1000 ────────► "1000"                          o
+  1000 ◄──────── "1000"                          o
+                 "true" ◄────── true             o
+                 "true" ──────► true            o x
+   1   ◄─────────────────────── true             ?
+  1000 ────────────────────────►true             o
+
+
+  ┌───────── const numbers = [4, 3, 1, 5, 1]  ◄────
+  │
+  │          const a = 1  ◄───
+  │                   │
+  │                   │
+  │                   │
+  │                   │          ┌───────────────────────────────────────────┐
+  │                   │          │ PC/Mobile                                 │
+  │                   │          │                                           │
+  │                   │          │   ┌──────────────────────────────────┐    │
+  │                   │          │   │ RAM (16GB) -> x o nho            │    │
+  │                   │          │   │                                  │    │
+  │                   │          │   │    ┌────┐                        │    │
+  │                   └──────────┼───┼───►│ 1  │                        │    │
+  │                              │   │    └────┘                        │    │
+  │                              │   │    ┌────┬───┬───┬───┬────┐       │    │
+  └──────────────────────────────┼───┼───►│ 4  │ 3 │ 1 │ 5 │ 1  │       │    │
+                                 │   │    └────┴───┴───┴───┴────┘       │    │
+                                 │   │     ────  1  ──── 3  ────        │    │
+                                 │   │      0  ───── 2  ──── 4          │    │
+                                 │   │                                  │    │
+                                 │   │                                  │    │
+                                 │   │                                  │    │
+                                 │   └──────────────────────────────────┘    │
+                                 │                                           │
+                                 └───────────────────────────────────────────┘
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
