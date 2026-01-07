@@ -859,11 +859,65 @@ true    false   false       true
 false   true    false       true
 false   false   true        true
 
+---------------------
+2026-01-05
+
+function demo() {
+
+}
+
+demo -- func name
+(a, b)-> a, b is parameter
+() -> no param
+{} -> content
 
 
 
+demo() -> execute func
+
+function demo() {
+  console.log('1234567')
+}
+
+--> no param, no output
 
 
+function demo2() {
+  console.log('1234567')
+  return 1
+}
+
+-> no input, output = 1
+
+function demo3(x) {
+  return x
+}
+
+-> f(x) = x
+x is a param
+
+demo3(100)
+
+100 -> argument
+
+function plusOne(x) {
+  return x + 1
+}
+
+f(x) = x + 1
+
+callback is arg, but this arg is func
+
+f(x, y) = .......
+
+a ++ : get value -> + 1
+++ a :  + 1 -> get value
+
+console.log(a++ + ++a + a-- - --a)
+
+             10 + 12 + 12  - 10
 
 
+10 ** 2 -> 10 ^ 2
 
+"this" is not working with arrow func
