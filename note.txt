@@ -921,3 +921,61 @@ console.log(a++ + ++a + a-- - --a)
 10 ** 2 -> 10 ^ 2
 
 "this" is not working with arrow func
+
+-----------
+Buoi 20: 2025-12-30
+
+
+loop - vong lap
+thuc hien di, thuc hien lai 1 cong viec nao do
+
+- for in
+- for of
+- forEach
+- white
+
+advance
+- map
+- filter
+- reduce
+
+Array.isArray(obj) -> check is array or not
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
