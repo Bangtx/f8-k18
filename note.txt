@@ -923,7 +923,7 @@ console.log(a++ + ++a + a-- - --a)
 "this" is not working with arrow func
 
 -----------
-Buoi 20: 2025-12-30
+Buoi 24: 2025-12-30
 
 
 loop - vong lap
@@ -940,6 +940,12 @@ advance
 - reduce
 
 Array.isArray(obj) -> check is array or not
+
+-----------
+Buoi 25: 2025-01-13
+
+tham chieu - reference
+
 
 
 
