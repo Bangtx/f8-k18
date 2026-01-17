@@ -946,13 +946,31 @@ Buoi 25: 2025-01-13
 
 tham chieu - reference
 
+-----------
+Buoi 26: 2025-01-17
+vong lap while
 
+while (active condition) {
+    do something
+}
 
+Array
 
-
-
-
-
+push()
+    - Adds a new element to the end of an array.
+pop()
+    - Removes the last element from an array.
+    - return removed element
+shift()
+    - Removes the first element from an array.
+    - return removed element
+unshift()
+    - Adds a new element to the beginning of an array.
+splice()
+    - Adds/removes elements from a specific index.
+    - return removed element
+sort()
+    - Sorts the elements of an array.
 
 
 
