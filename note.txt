@@ -973,6 +973,32 @@ sort()
     - Sorts the elements of an array.
 
 
+                   for              for of              forEach
+
+
+  index             o                 x                   o
+
+  direct value      x                 o                   o
+
+  break             o                 o                   x
+
+  continue          o                 o                   x
+
+  stop condition    o                 x                   x
+
+
+indexOf
+    - return index of element which you need
+        -1 -> not exists
+        !== -1 -> exists
+    - can be use to check existing element
+    - if there are many elements
+        -> first index element from the index you want to find
+        -> not found -> return -1
+
+
+
+
 
 
 
