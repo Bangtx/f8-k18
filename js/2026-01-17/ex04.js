@@ -3,9 +3,8 @@
 // const numbers = [0, 3, 4, 1, 3, 4, 5, 7, 9]
 //
 // numbers.forEach((value, index) => {
-//   console.log(value, index)
+//   console.log(value)
 // })
-
 
 /*
 *
@@ -29,7 +28,7 @@
 // indexOf
 
 const numbers = [0, 3, 4, 1, 3, 4, 5, 7, 9]
-const index = numbers.indexOf(3, 9)
+const index = numbers.indexOf(3, 2)
 console.log(index)
 // includes
 
