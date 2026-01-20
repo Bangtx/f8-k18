@@ -996,12 +996,38 @@ indexOf
         -> first index element from the index you want to find
         -> not found -> return -1
 
+includes
+    - array.includes(<element>)
+        -> true / false
+    - use to check existing element
+    - check substring
+       const productName = 'Gạo ST25 (5kg)'
+       console.log(productName.includes('gạo'))
 
+find
+    - use when you make sure the result only 1 elementrs
+    - base on loop (forEach) -> O(n)
+    - return only 1 element if callback func return true
+    - return undefined if callback func return false
 
+-> find by name, price > 1000
+-> many elements
 
+filter
 
+const products = [
+  { id: 1, name: "Gạo ST25 (5kg)", price: 180000, remaining: 20 },
+  { id: 2, name: "Dầu ăn Simply (1L)", price: 65000, remaining: 15 },
+  { id: 3, name: "Nước mắm Nam Ngư (750ml)", price: 45000, remaining: 30 },
+  { id: 4, name: "Sữa tươi Vinamilk (1L)", price: 38000, remaining: 25 },
+  { id: 5, name: "Trứng gà (10 quả)", price: 45000, remaining: 18 }
+];
 
+get ids [1, 2, 3, 4, 5]
+get names ["Gạo ST25 (5kg)", "Dầu ăn Simply (1L)", ...]
 
+-> map
+return new array with length = original array
 
 
 
