@@ -1032,7 +1032,7 @@ return new array with length = original array
 
 
 -----------
-Buoi 27: 2025-01-24
+Buoi 28: 2025-01-24
 
 string
 
@@ -1074,16 +1074,51 @@ OOP:
     - Tinh dong goi
     - Tinh tru tuong
 
+-----------
+Buoi 29: 2025-01-26
+
+ko than thanh hoa
+OOP -> cach tu duy giai quyet van de
+function -> giai quyet van de ok
+
+OOP
+    mo hinh hoa cac thanh phan trong 1 ung dung
+
+    Game Lien Quan
+        - Nhan Vat
+            + Trieu van
+            + ....
+
+            - ten
+            - trang phuc
+            - di chuyen
+            - tung chieu
+            - mau
+            - mana
+            - ....
+        - Chieu
+        - Trang phuc
 
 
+    class <- interface
 
 
+- Tinh ke thua
+    class/interface con se mang day du tinh chat cua class cha
 
+- Tinh da hinh
+    con mang thuoc tinh cua cha
+    co nhieu the hien (hinh hai) khac nhau
 
+    overwrite method
 
+super -> goi cac thuoc tinh cua class cha
 
+abstract class, interface deu dung de design
 
-
-
+abstract class -> co the trien khai cac method
+ex speaking() {
+      console.log('speaking')
+   }
 
 
