@@ -1031,16 +1031,48 @@ return new array with length = original array
 
 
 
+-----------
+Buoi 27: 2025-01-24
+
+string
 
 
+const a = {
+  id: 1,
+  name: "A"
+}
+
+// add "address"
+a.address = 'Ha Noi'
+
+const b = a
+
+-> shallow copy (copy nong >< sau)
 
 
+const b = JSON.parse(JSON.stringify(a))
+
+-> deep copy (copy sau)
 
 
+typescript: javascript + type
+OOP
 
+interface Employee {
+  id: number
+  name: string
+  salary?: number
+}
 
+-> ? salary co the co hoac ko
+salary: number | null
+bat buoc phai co, gia tri null hoac so deu ok
 
-
+OOP:
+    - Tinh ke thua
+    - Tinh da hinh
+    - Tinh dong goi
+    - Tinh tru tuong
 
 
 
