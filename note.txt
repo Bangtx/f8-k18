@@ -1122,3 +1122,11 @@ ex speaking() {
    }
 
 
+-----------
+Buoi 30: 2025-01-21
+
+observer pattern
+
+js/ts module
+    -> code qua lon/lon xon
+    -> chia file/folder

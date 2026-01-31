@@ -120,6 +120,8 @@ class Store implements StoreI {
     this.customers = []
   }
 
+  deleteCustomer: (cstId: number) => void
+
   getId(): number {
     return this.id
   }
