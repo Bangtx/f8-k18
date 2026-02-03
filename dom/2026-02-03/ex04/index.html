@@ -5,59 +5,106 @@
   <title>Title</title>
 </head>
 <body>
-<main>
-  <table border="1" cellspacing="0" width="100%">
-    <thead>
-      <tr>
-        <th>code</th>
-        <th>customer</th>
-        <th>product</th>
-        <th>amount</th>
-        <th>status</th>
-        <th>action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>001</td>
-        <td>Tran Xuan Banh</td>
-        <td>Laptop</td>
-        <td>3000000</td>
-        <td>OK</td>
-        <td>
-          <button>Edit</button>
-          <button>Delete</button>
-        </td>
-      </tr>
+<main></main>
 
-      <tr>
-        <td>001</td>
-        <td>Tran Xuan Son</td>
-        <td>Iphone 4</td>
-        <td>2000000</td>
-        <td>NG</td>
-        <td>
-          <button>Edit</button>
-          <button>Delete</button>
-        </td>
-      </tr>
+<script>
+  const headers = ['code', 'customer', 'product', 'amount', 'status', 'action']
+  // const newHeaders = [
+  //   {
+  //     key: 'code',
+  //     text: 'Mã',
+  //     textAlign: 'right'
+  //   },
+  //   {
+  //     key: 'customer',
+  //     text: 'Khach Hang',
+  //     textAlign: 'right'
+  //   }
+  // ]
 
-      <tr>
-        <td>001</td>
-        <td>Nguyen Xuan Hoang</td>
-        <td>Nokia 2</td>
-        <td>1000000</td>
-        <td>OK</td>
-        <td>
-          <button>Edit</button>
-          <button>Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</main>
+  const orders = [
+    {
+      id: 1,
+      code: '001',
+      customer: 'Tran Xuan Banh',
+      address: 'Ha Noi',
+      product: 'Laptop',
+      amount: 3000000,
+      status: 'OK'
+    },
+    {
+      id: 2,
+      code: '002',
+      customer: 'Tran Xuan Son',
+      address: 'Da Nang',
+      product: 'Iphone',
+      amount: 2000000,
+      status: 'NG'
+    }
+  ]
 
-<script></script>
+  const renderOrderTable = () => {
+    const mainE = document.querySelector('main')
+    // create table
+    const tableE = document.createElement('table')
+    tableE.setAttribute('border', 1)
+    tableE.setAttribute('cellspacing', 0)
+    tableE.setAttribute('width', '100%')
+
+    const theadE = document.createElement('thead')
+    const tbodyE = document.createElement('tbody')
+
+    // render header v2
+    const trHeaderE = document.createElement('tr')
+    headers.forEach(header => {
+      const thE = document.createElement('th')
+      thE.textContent = header
+      trHeaderE.append(thE)
+    })
+    theadE.append(trHeaderE)
+
+    // render table body
+    // loop orders -> render row
+    /*
+    * <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+    * </tbody>
+    * */
+    orders.forEach(order => {
+      const trE = document.createElement('tr')
+
+      Object.keys(order).forEach(key => {
+        if (headers.includes(key)) {
+          const tdE = document.createElement('td')
+          tdE.textContent = order[key]
+
+          trE.append(tdE)
+        }
+      })
+
+      const tdE = document.createElement('td')
+      tdE.innerHTML = `
+        <td>
+          <button>edit</button>
+          <button>delete</button>
+        </td>
+      `
+
+      trE.append(tdE)
+      tbodyE.append(trE)
+    })
+
+    tableE.append(theadE)
+    tableE.append(tbodyE)
+    mainE.append(tableE)
+  }
+
+  renderOrderTable()
+</script>
 
 </body>
 </html>
