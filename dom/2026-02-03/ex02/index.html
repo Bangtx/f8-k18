@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <header></header>
+  <main></main>
+  <footer></footer>
+
+  <script>
+    const mainE = document.querySelector('main')
+
+    const pE = document.createElement('p')
+    Object.assign(pE.style, {
+      color: 'red',
+      backgroundColor: 'blue'
+    })
+
+    pE.textContent = 'Test thui'
+
+    // let htmpTmp = '<p>Day la doan van ban</p>'
+    // for (let i = 0; i < 100000; i ++) {
+    //   htmpTmp += '<p>Day la doan van ban</p>'
+    // }
+    // pE.innerHTML = htmpTmp
+    mainE.append(pE)
+
+  </script>
+</body>
+</html>

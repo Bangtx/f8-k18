@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<h1 id="header" class="pt-1">My header</h1>
+<h2>sub header 1</h2>
+<h2 class="pt-1">sub header 2</h2>
+<a href="#" class="pt-1">click me</a>
+
+<ul>
+  <li>home</li>
+  <li>about</li>
+  <li>contact</li>
+</ul>
+
+
+<script>
+  // js
+  // change text in h1
+
+  const e = document.querySelector('ul > li:nth-of-type(2)')
+
+  console.log(e)
+
+  // update element
+  e.innerHTML = "<a href='https://youtube.com'>YouTube</a>"
+
+</script>
+
+</body>
+</html>

@@ -1130,3 +1130,17 @@ observer pattern
 js/ts module
     -> code qua lon/lon xon
     -> chia file/folder
+
+-----------
+Buoi 31: 2025-02-03
+
+get the element
+1. getElementById -> get 1
+2. getElementsByTagName -> get many HTMLCollection ~ List ~ Array
+3. getElementsByClassName -> get many HTMLCollection ~ List ~ Array
+4. querySelector(<element selector>) -> get frist one
+
+
+innerHTML -> update html / text
+innerText -> update text
+

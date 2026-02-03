@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <main></main>
+
+  <script>
+    const renderCategories = () => {
+      const categories = [
+        'quan ao',
+        'dien thoai',
+        'do dien tui',
+        'da quy'
+      ]
+
+      // get main element
+      const mainElement = document.querySelector('main')
+
+      // create ul
+      const ulElement = document.createElement('ul')
+
+      categories.forEach(category => {
+        const liElement = document.createElement('li')
+        liElement.textContent = category
+
+        ulElement.append(liElement)
+      })
+
+      mainElement.append(ulElement)
+    }
+
+    renderCategories()
+
+  </script>
+</body>
+</html>
