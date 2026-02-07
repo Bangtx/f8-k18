@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+  <h1>This is heading</h1>
+
+  <button>An</button>
+
+  <script>
+    const h1 = document.querySelector('h1')
+    const button = document.querySelector('button')
+
+    button.addEventListener('click', () => {
+      if (h1.style.display !== 'none') {
+        h1.style.display = 'none'
+        button.innerText = "hien"
+      }
+      else {
+        h1.style.display = 'block'
+        button.innerText = "An"
+      }
+    })
+  </script>
+</body>
+
+</html>

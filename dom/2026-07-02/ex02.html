@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <style>
+    .bg--red {
+        background-color: red;
+    }
+
+    .bg--blue {
+        background-color: blue;
+    }
+
+    h1 {
+        color: red;
+    }
+    
+    @media screen and (max-width: 600px){
+        h1 {
+            color: blue;
+        }
+    }
+  </style>
+
+</head>
+<body>
+
+<header></header>
+
+<script>
+  const headerE = document.querySelector('header')
+  const h1E = document.createElement('h1')
+  h1E.textContent = 'F8 hoc lap trinh'
+  // h1E.style.color = 'yellow'
+  h1E.classList.add('bg--red')
+
+  headerE.append(h1E)
+</script>
+
+</body>
+</html>

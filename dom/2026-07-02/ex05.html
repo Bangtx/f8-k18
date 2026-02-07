@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <label for="searchStr">Search Str</label>
+  <input id="searchStr" name="searchStr">
+  <div id="customer-list"></div>
+
+  <script>
+    /*
+    * 1. list 10 cst nay len -> ul - li
+    * 2. khi nhap vao the input -> loc ra nhung khach hang co ten tuong du
+    * vd:
+    *   trong the input nhap chu "Th"
+    *   cst 2, 5, 7, 10 se dc hien
+    * */
+    const customers = [
+      { "id": 1, "name": "Nguyễn Văn An" },
+      { "id": 2, "name": "Trần Thị Bình" },
+      { "id": 3, "name": "Lê Hoàng Cường" },
+      { "id": 4, "name": "Phạm Minh Đức" },
+      { "id": 5, "name": "Võ Thị Hạnh" },
+      { "id": 6, "name": "Đặng Quốc Huy" },
+      { "id": 7, "name": "Bùi Thanh Long" },
+      { "id": 8, "name": "Hoàng Ngọc Mai" },
+      { "id": 9, "name": "Đỗ Anh Quân" },
+      { "id": 10, "name": "Nguyễn Thảo Vy" }
+    ]
+
+
+    const inputE = document.querySelector('#searchStr')
+
+    const showCustomers = (customers) => {
+      const categoryListE = document.querySelector('#customer-list')
+      // reset dom
+      categoryListE.innerHTML = ''
+
+      // init customer list
+      const ul = document.createElement('ul')
+
+      customers.forEach(customer => {
+        const li = document.createElement('li')
+        li.innerText = customer.name
+        ul.append(li)
+      })
+
+      categoryListE.append(ul)
+    }
+
+    inputE.addEventListener('input', (e) => {
+      const filteredCustomers = customers.filter(customer => customer.name.includes(e.target.value))
+      showCustomers(filteredCustomers)
+    })
+
+    showCustomers(customers)
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+      :root {
+          --primary-color: #3498db;
+          --dark-color: #2c3e50;
+          --bg-color: #f4f7f6;
+          --success: #2ecc71;
+          --danger: #e74c3c;
+      }
+      /* Sidebar */
+      .sidebar {
+          width: var(--sidebar-width); background: var(--dark-color); color: white;
+          padding: 25px; position: fixed; height: 100vh; left: 0; z-index: 1000; transition: 0.3s;
+      }
+      .sidebar h2 { margin-bottom: 30px; text-align: center; color: var(--primary-color); }
+      .sidebar ul { list-style: none; }
+      .sidebar ul li { padding: 12px; cursor: pointer; border-radius: 8px; margin-bottom: 5px; display: flex; align-items: center; }
+      .sidebar ul li i { margin-right: 15px; }
+      .sidebar ul li.active { background: #34495e; color: var(--primary-color); }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar" id="sidebar">
+      <h2>ShopAdmin</h2>
+      <ul id="sidebar__menu">
+      </ul>
+    </aside>
+  </div>
+
+  <script>
+
+    const categories = [
+      {
+        path: '',
+        icon: 'fa-home',
+        text: 'Tổng quan',
+        name: 'home'
+      },
+      {
+        path: 'products',
+        icon: 'fa-box',
+        text: 'Sản phẩm',
+        name: 'product'
+      },
+      {
+        path: 'orders',
+        icon: 'fa-shopping-cart',
+        text: 'Đơn hàng',
+        name: 'order'
+      },
+      {
+        path: 'customers',
+        icon: 'fa-users',
+        text: 'Khách hàng',
+        name: 'customer'
+      },
+      {
+        path: 'report',
+        icon: 'fa-chart-line',
+        text: 'Báo cáo',
+        name: 'report'
+      }
+    ]
+
+    const currentPage = 'product'
+
+    const onMounted = () => {
+      const sidebarMenuE = document.querySelector('#sidebar__menu')
+
+      categories.forEach(category => {
+        const liE = document.createElement('li')
+        liE.innerHTML = `<i class="fas ${category.icon}"></i>${category.text}`
+        sidebarMenuE.append(liE)
+      })
+    }
+
+    onMounted()
+  </script>
+</body>
+</html>

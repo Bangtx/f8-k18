@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <style>
+    .color--red {
+        color: red;
+    }
+
+    .color--green {
+        color: green;
+    }
+
+    .color--yellow {
+        color: yellow;
+    }
+
+    .border--red {
+        border: 10px solid red;
+    }
+  </style>
+
+</head>
+<body>
+  <h1 class="border--red">F8 hoc lap trinh</h1>
+
+  <p>ban muon mau chu la mau gi</p>
+  <button target-color="red">do</button>
+  <button target-color="green">xanh</button>
+  <button target-color="yellow">vang</button>
+
+  <script>
+    // const btns = Array.from(document.getElementsByTagName('button'))
+    const btns = document.getElementsByTagName('button')
+
+    for (let i = 0; i < btns.length; i++) {
+      const btn = btns[i]
+
+      btn.addEventListener('click', () => {
+        const h1 = document.querySelector('h1')
+        const targetColor = btn.getAttribute('target-color')
+        h1.style.color = targetColor
+      })
+    }
+
+    // btns.forEach(btn => {
+    //   btn.addEventListener('click', () => {
+    //     const h1 = document.querySelector('h1')
+    //     const targetColor = btn.getAttribute('target-color')
+    //     h1.style.color = targetColor
+    //   })
+    // })
+
+    // const redBtn = document.querySelector('#red-btn')
+    // const greenBtn = document.querySelector('#green-btn')
+    // const yellowBtn = document.querySelector('#yellow-btn')
+    //
+    // // observer pattern
+    // redBtn.addEventListener('click', () => {
+    //   const h1 = document.querySelector('h1')
+    //   console.log(11111, redBtn.getAttribute('target-color'))
+    //   h1.style.color = 'red'
+    // })
+    //
+    // greenBtn.addEventListener('click', () => {
+    //   const h1 = document.querySelector('h1')
+    //   h1.style.color = 'green'
+    // })
+    //
+    // yellowBtn.addEventListener('click', () => {
+    //   const h1 = document.querySelector('h1')
+    //   h1.style.color = 'yellow'
+    // })
+  </script>
+</body>
+</html>

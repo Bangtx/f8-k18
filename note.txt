@@ -1144,3 +1144,17 @@ get the element
 innerHTML -> update html / text
 innerText -> update text
 
+
+-----------
+Buoi 32: 2025-02-07
+
+dom co ban
+    - click
+    - input
+
+-----------
+Buoi 33:
+    - localstorage/ sessionstorage/cookie
+    - eventloop
+    - API
+    -> login/logout
