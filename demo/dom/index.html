@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<main></main>
+
+<script>
+  const headers = ['code', 'customer', 'product', 'amount', 'status', 'action']
+  // const newHeaders = [
+  //   {
+  //     key: 'code',
+  //     text: 'Mã',
+  //     textAlign: 'right'
+  //   },
+  //   {
+  //     key: 'customer',
+  //     text: 'Khach Hang',
+  //     textAlign: 'right'
+  //   }
+  // ]
+
+  const orders = [
+    {
+      id: 1,
+      code: '001',
+      customer: 'Tran Xuan Banh',
+      address: 'Ha Noi',
+      product: 'Laptop',
+      amount: 3000000,
+      status: 'OK'
+    },
+    {
+      id: 2,
+      code: '002',
+      customer: 'Tran Xuan Son',
+      address: 'Da Nang',
+      product: 'Iphone',
+      amount: 2000000,
+      status: 'NG'
+    }
+  ]
+
+
+  const commonTabel = (columns, rows) => {
+    const mainE = document.querySelector('main')
+    // create table
+    const tableE = document.createElement('table')
+    tableE.setAttribute('border', 1)
+    tableE.setAttribute('cellspacing', 0)
+    tableE.setAttribute('width', '100%')
+
+    const theadE = document.createElement('thead')
+    const tbodyE = document.createElement('tbody')
+
+    // render header v2
+    const trHeaderE = document.createElement('tr')
+    columns.forEach(col => {
+      const thE = document.createElement('th')
+      thE.textContent = col
+      trHeaderE.append(thE)
+    })
+    theadE.append(trHeaderE)
+
+    // render table body
+    // loop orders -> render row
+    /*
+    * <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+    * </tbody>
+    * */
+    rows.forEach(row => {
+      const trE = document.createElement('tr')
+
+      Object.keys(row).forEach(key => {
+        if (headers.includes(key)) {
+          const tdE = document.createElement('td')
+          tdE.textContent = row[key]
+
+          trE.append(tdE)
+        }
+      })
+
+      const tdE = document.createElement('td')
+      tdE.innerHTML = `
+        <td>
+          <button>edit</button>
+          <button>delete</button>
+        </td>
+      `
+
+      trE.append(tdE)
+      tbodyE.append(trE)
+    })
+
+    tableE.append(theadE)
+    tableE.append(tbodyE)
+    mainE.append(tableE)
+  }
+
+  commonTabel(headers, orders)
+
+  const prodHeaders = []
+
+  commonTabel(headers, orders)
+</script>
+
+</body>
+</html>
