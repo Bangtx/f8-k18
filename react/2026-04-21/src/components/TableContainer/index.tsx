@@ -1,5 +1,5 @@
 import {
-  Table, TableHead, TableCell, TableRow, TableBody
+  Table, TableHead, TableCell, TableRow, TableBody, TablePagination
 } from '@mui/material'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -15,7 +15,14 @@ interface Props {
 }
 
 const TableContainer = ({columns, rows, maxWidth, onClickEdit, onClickDelete}: Props) => {
-  console.log('render')
+  const handleChangePage = () => {
+
+  }
+
+  const handleChangeRowsPerPage = () => {
+
+  }
+
   const onEdit = (id: number) => {
     onClickEdit && onClickEdit(id)
   }
@@ -25,40 +32,51 @@ const TableContainer = ({columns, rows, maxWidth, onClickEdit, onClickDelete}: P
   }
 
   return (
-    <Table sx={{ maxWidth: maxWidth, margin: 'auto' }} size="small" aria-label="simple table">
-      <TableHead>
-        <TableRow>
+    <>
+      <Table sx={{ maxWidth: maxWidth, margin: 'auto' }} size="small" aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            {
+              columns.map((column) => {
+                return <TableCell style={column.style} key={column.value}>{column.text}</TableCell>
+              })
+            }
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {
-            columns.map((column) => {
-              return <TableCell style={column.style} key={column.value}>{column.text}</TableCell>
+            rows.map(row => {
+              return (
+                <TableRow key={row.id}>
+                  {
+                    columns.map(column => {
+                      if (column.value === 'action') {
+                        return (
+                          <TableCell>
+                            <EditOutlinedIcon sx={{padding: '4px'}} color={'success'} onClick={() => onEdit(row.id)}/>
+                            <DeleteIcon sx={{padding: '4px'}} color={'error'} onClick={() => onDelete(row.id)}/>
+                          </TableCell>
+                        )
+                      }
+                      return <TableCell style={column.style} key={column.value}>{row[column.value]}</TableCell>
+                    })
+                  }
+                </TableRow>
+              )
             })
           }
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {
-          rows.map(row => {
-            return (
-              <TableRow key={row.id}>
-                {
-                  columns.map(column => {
-                    if (column.value === 'action') {
-                      return (
-                        <TableCell>
-                          <EditOutlinedIcon sx={{padding: '4px'}} color={'success'} onClick={() => onEdit(row.id)}/>
-                          <DeleteIcon sx={{padding: '4px'}} color={'error'} onClick={() => onDelete(row.id)}/>
-                        </TableCell>
-                      )
-                    }
-                    return <TableCell style={column.style} key={column.value}>{row[column.value]}</TableCell>
-                  })
-                }
-              </TableRow>
-            )
-          })
-        }
-      </TableBody>
-    </Table>
+        </TableBody>
+      </Table>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={5}
+        page={1}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </>
   )
 }
 
