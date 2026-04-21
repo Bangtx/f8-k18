@@ -4,7 +4,7 @@ import {
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import DeleteIcon from '@mui/icons-material/Delete'
 import type {Column, Row} from "../../utils"
-import {memo} from 'react'
+import {memo, useEffect, useState} from 'react'
 
 interface Props {
   columns: Column[]
@@ -15,12 +15,21 @@ interface Props {
 }
 
 const TableContainer = ({columns, rows, maxWidth, onClickEdit, onClickDelete}: Props) => {
+  const [tmpRows, setTmpRows] = useState([...rows])
+
+  useEffect(() => {
+    setTmpRows([...rows])
+  }, [rows]);
+
+  const [rowsPerPage, setRowsPerPage] = useState<number>(5)
+
   const handleChangePage = () => {
 
   }
 
-  const handleChangeRowsPerPage = () => {
-
+  const handleChangeRowsPerPage = (e) => {
+    setRowsPerPage(e.target.value)
+    setTmpRows([...rows.slice(0, e.target.value)])
   }
 
   const onEdit = (id: number) => {
@@ -45,7 +54,7 @@ const TableContainer = ({columns, rows, maxWidth, onClickEdit, onClickDelete}: P
         </TableHead>
         <TableBody>
           {
-            rows.map(row => {
+            tmpRows.map(row => {
               return (
                 <TableRow key={row.id}>
                   {
@@ -71,7 +80,7 @@ const TableContainer = ({columns, rows, maxWidth, onClickEdit, onClickDelete}: P
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
         count={rows.length}
-        rowsPerPage={5}
+        rowsPerPage={rowsPerPage}
         page={1}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
