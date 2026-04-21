@@ -4,7 +4,7 @@ import { TableContainer } from "./components";
 import type {Column} from "./utils";
 import {useState} from "react";
 import * as React from "react";
-
+import {v7} from "uuid";
 
 const productNames = ['Quần áo', 'Giày dép', 'Điện thoại', 'Laptop', 'Tai nghe', 'Balo']
 
@@ -21,24 +21,6 @@ const customerNames = [
   'Phan Thị K'
 ]
 
-
-const tmpOrders = Array.from({ length: 1000 }, (_, i) => {
-  const randomDate = new Date(
-    2026,
-    Math.floor(Math.random() * 12),
-    Math.floor(Math.random() * 28) + 1
-  )
-
-  return {
-    id: i + 1,
-    customerName: customerNames[Math.floor(Math.random() * customerNames.length)],
-    productName: productNames[Math.floor(Math.random() * productNames.length)],
-    price: Math.floor(Math.random() * 5000000) + 100000, // 100k -> 5tr
-    orderDate: randomDate.toISOString().split('T')[0],
-    quantity: Math.floor(Math.random() * 10) + 1
-  }
-})
-
 const columns: Column[] = [
   { text: 'Mã đơn', value: 'id' },
   { text: 'Tên khách hàng', value: 'customerName' },
@@ -48,17 +30,43 @@ const columns: Column[] = [
   { text: 'Số lượng', value: 'quantity' }
 ]
 
-const orders = tmpOrders
+const getRandomOrder = () => {
+  const randomDate = new Date(
+    2026,
+    Math.floor(Math.random() * 12),
+    Math.floor(Math.random() * 28) + 1
+  )
+
+  return {
+    id: v7(),
+    customerName: customerNames[Math.floor(Math.random() * customerNames.length)],
+    productName: productNames[Math.floor(Math.random() * productNames.length)],
+    price: Math.floor(Math.random() * 5000000) + 100000, // 100k -> 5tr
+    orderDate: randomDate.toISOString().split('T')[0],
+    quantity: Math.floor(Math.random() * 10) + 1
+  }
+}
+
+const tmpOrders = Array.from({ length: 4 }, (_) => {
+  return getRandomOrder()
+})
 
 function App() {
   const [searchStr, setSearchStr] = useState<string>('')
   const [isOpen, setIsOpem] = useState(false)
+  const [orders, setOrders] = useState([...tmpOrders])
 
   const handleClose = () => setIsOpem(!isOpen)
+
+  const onAddOrder = () => {
+    const newOrder = getRandomOrder()
+    setOrders([...orders, newOrder])
+  }
 
   return (
     <>
       <Box sx={{maxWidth: 800, margin: 'auto'}}>
+        <Button onClick={onAddOrder}>Add order</Button>
         <Button onClick={() => setIsOpem(true)}>Open POPUP</Button>
         <TextField
           value={searchStr}
