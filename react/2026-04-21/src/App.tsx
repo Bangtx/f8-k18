@@ -2,7 +2,7 @@ import './App.css'
 import { TextField, Box, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@mui/material'
 import { TableContainer } from "./components";
 import type {Column} from "./utils";
-import {useState} from "react";
+import {useState, useMemo} from "react";
 import * as React from "react";
 import {v7} from "uuid";
 
@@ -47,7 +47,7 @@ const getRandomOrder = () => {
   }
 }
 
-const tmpOrders = Array.from({ length: 4 }, (_) => {
+const tmpOrders = Array.from({ length: 1000 }, (_) => {
   return getRandomOrder()
 })
 
@@ -63,6 +63,22 @@ function App() {
     setOrders([...orders, newOrder])
   }
 
+  // const totalAmount = () => {
+  //   return orders.reduce((a, b) => {
+  //     return a + b.price
+  //   }, 0)
+  // }
+
+  const totalAmount = useMemo(
+    () => {
+      console.log('redetf')
+      return orders.reduce((a, b) => {
+        return a + b.price
+      }, 0)
+    },
+    [orders]
+  )
+
   return (
     <>
       <Box sx={{maxWidth: 800, margin: 'auto'}}>
@@ -75,6 +91,9 @@ function App() {
           fullWidth
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchStr(e.target.value)}
         />
+        <Box>
+          <p>Tong Tien La: {totalAmount}</p>
+        </Box>
         <TableContainer columns={columns} rows={orders} maxWidth={800}/>
 
         <Dialog

@@ -1,10 +1,9 @@
 import {
-  Table, TableHead, TableCell, TableRow, TableBody, TablePagination
+  Table, TableHead, TableCell, TableRow, TableBody
 } from '@mui/material'
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import DeleteIcon from '@mui/icons-material/Delete'
 import type {Column, Row} from "../../utils"
-import {memo, useEffect, useState} from 'react'
+import {memo} from 'react'
+import FRow from './row.tsx'
 
 interface Props {
   columns: Column[]
@@ -15,30 +14,6 @@ interface Props {
 }
 
 const TableContainer = ({columns, rows, maxWidth, onClickEdit, onClickDelete}: Props) => {
-  const [tmpRows, setTmpRows] = useState([...rows])
-
-  useEffect(() => {
-    setTmpRows([...rows])
-  }, [rows]);
-
-  const [rowsPerPage, setRowsPerPage] = useState<number>(5)
-
-  const handleChangePage = () => {
-
-  }
-
-  const handleChangeRowsPerPage = (e) => {
-    setRowsPerPage(e.target.value)
-    setTmpRows([...rows.slice(0, e.target.value)])
-  }
-
-  const onEdit = (id: number) => {
-    onClickEdit && onClickEdit(id)
-  }
-
-  const onDelete = (id: number) => {
-    onClickDelete && onClickDelete(id)
-  }
 
   return (
     <>
@@ -54,37 +29,19 @@ const TableContainer = ({columns, rows, maxWidth, onClickEdit, onClickDelete}: P
         </TableHead>
         <TableBody>
           {
-            tmpRows.map(row => {
+            rows.map(row => {
               return (
-                <TableRow key={row.id}>
-                  {
-                    columns.map(column => {
-                      if (column.value === 'action') {
-                        return (
-                          <TableCell>
-                            <EditOutlinedIcon sx={{padding: '4px'}} color={'success'} onClick={() => onEdit(row.id)}/>
-                            <DeleteIcon sx={{padding: '4px'}} color={'error'} onClick={() => onDelete(row.id)}/>
-                          </TableCell>
-                        )
-                      }
-                      return <TableCell style={column.style} key={column.value}>{row[column.value]}</TableCell>
-                    })
-                  }
-                </TableRow>
+                <FRow
+                  row={row}
+                  columns={columns}
+                  onClickEdit={onClickEdit}
+                  onClickDelete={onClickDelete}
+                />
               )
             })
           }
         </TableBody>
       </Table>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={1}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </>
   )
 }
