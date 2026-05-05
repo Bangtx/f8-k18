@@ -104,7 +104,12 @@ function App() {
             />
           </Grid>
           <Grid size={4}>
-            <SideBar onNext={onNext} onPrev={onPrev}/>
+            <SideBar
+              totalQuestion={questions.length}
+              selectingQuestion={questionIndex}
+              onNext={onNext}
+              onPrev={onPrev}
+            />
           </Grid>
         </Grid>
       </Box>
