@@ -1,0 +1,28 @@
+{
+  "customers": [
+    {
+      "id": "1",
+      "name": "Nguyen Van A",
+      "age": 10
+    },
+    {
+      "name": "Pham Thi B",
+      "age": 31,
+      "id": "2"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Dien Thoai"
+    }
+  ],
+  "products": [
+    {
+      "id": "12331w",
+      "name": "iphone 17",
+      "categoryId": 1
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
