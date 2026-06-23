@@ -1,0 +1,13 @@
+services:
+  db:
+    container_name: 'k18-database'
+    image: postgres:17
+    ports:
+      - '3000:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: default
+    volumes:
+      - './db:/var/lib/postgresql/data'
+
