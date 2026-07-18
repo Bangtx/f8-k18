@@ -1,0 +1,10 @@
+services:
+  api:
+    container_name: 'f8-k18-express'
+    image: node:24.0.0-alpine
+    working_dir: /app/api
+    ports:
+      - '3000:3000'
+    volumes:
+      - './:/app/api'
+    command: ['npm', 'run', 'dev']

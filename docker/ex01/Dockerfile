@@ -5,8 +5,8 @@
 #   -> cloud (dockerhub, aws ecr ...)
 FROM my-image:latest
 
-WORKDIR /app
+WORKDIR /index
 
-COPY ./web /app
+COPY ./web /index
 
 CMD ["npm", "run", "dev"]
