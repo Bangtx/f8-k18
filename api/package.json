@@ -14,11 +14,18 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
     "express": "^5.2.1",
+    "pg": "^8.22.0",
+    "pg-query-stream": "^4.16.0",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.31",
+    "typeorm-naming-strategies": "^4.1.0",
     "uuid": "^14.0.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^26.1.1",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1",
     "tsx": "^4.23.0",
     "typescript": "^7.0.2"
   }
