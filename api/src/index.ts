@@ -1,5 +1,5 @@
 import express, { type Express } from 'express';
-import {userRouter} from './routers'
+import {userRouter, customerRouter} from './routers'
 import swaggerJsDoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
 import 'reflect-metadata'
@@ -32,4 +32,5 @@ app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 app.use('/users', userRouter)
+app.use('/customers', customerRouter)
 app.listen(3000)
