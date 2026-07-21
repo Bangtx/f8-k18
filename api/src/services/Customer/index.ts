@@ -12,6 +12,45 @@ class CustomerService {
 
     return await query.getRawMany()
   }
+
+  async create(customer: any) {
+    const query =
+      AppDataSource
+        .getRepository(CustomerEntity)
+        .createQueryBuilder("customer")
+        .insert()
+        .into(CustomerEntity)
+        .values([customer])
+        .returning(["id", "name"])
+
+    return await query.execute()
+  }
+
+  async updateById(id: number, customer: any) {
+    const query =
+      AppDataSource
+        .getRepository(CustomerEntity)
+        .createQueryBuilder("customer")
+        .update(customer)
+        .where("customer.id = :id", {id})
+        .returning(["id", "name"])
+
+    return await query.execute()
+  }
+
+  async deleteById(id: number){
+    const query: any = AppDataSource
+      .getRepository(CustomerEntity)
+      .createQueryBuilder("customer")
+      .update(CustomerEntity)
+      .set({
+        isActive: false,
+      })
+      .where("customer.id = :id", {id})
+      .returning(["id", "name", "isActive"]);
+
+    return await query.execute();
+  }
 }
 
 const customerService = new CustomerService()

@@ -1,5 +1,8 @@
 import express, {Request, Response} from "express";
 import customerService from '../../services/Customer'
+import {plainToInstance} from "class-transformer";
+import {CustomerCreateDto} from "../../dtos";
+import {validate} from "class-validator";
 const router = express.Router();
 
 /**
@@ -25,7 +28,91 @@ const router = express.Router();
  *                     example: John Doe
  */
 router.get('/', async (req: Request, res: Response) => {
-  res.json(await customerService.getList());
+  res.json(await customerService.getList())
+})
+
+
+/**
+ * @swagger
+ * /customers:
+ *   post:
+ *     summary: Create customers
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: John Doe
+ */
+router.post('/', async (req: Request, res: Response) => {
+  const newCustomer = plainToInstance(CustomerCreateDto, req.body);
+  const errors = await validate(newCustomer);
+
+  if (errors.length > 0) {
+    return res.status(400).json(errors);
+  }
+  res.json(await customerService.create(newCustomer))
+})
+
+/**
+ * @swagger
+ * /customers/{id}:
+ *   put:
+ *     summary: Replace customers
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: int
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: John Doe
+ */
+router.put('/:id', async (req: Request, res: Response) => {
+  const customerId = Number(req.params.id);
+
+  const newCustomer = plainToInstance(CustomerCreateDto, req.body);
+  const errors = await validate(newCustomer);
+
+  if (errors.length > 0) {
+    return res.status(400).json(errors);
+  }
+
+  res.json(await customerService.updateById(customerId, newCustomer))
+})
+
+/**
+ * @swagger
+ * /customers/{id}:
+ *   delete:
+ *     summary: Xoá khách hàng
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: int
+ *     tags:
+ *       - Customers
+ *     responses:
+ *       400:
+ *         description: Dữ liệu không hợp lệ
+ */
+
+router.delete("/:id", async (req: Request, res: Response) => {
+  const customerId = Number(req.params.id);
+
+  res.json(await customerService.deleteById(customerId));
+
+  res.status(204).send(`Delete`);
 });
 
 export default router;
