@@ -3,6 +3,9 @@ import customerService from '../../services/Customer'
 import {plainToInstance} from "class-transformer";
 import {CustomerCreateDto} from "../../dtos";
 import {validate} from "class-validator";
+import {ValidationPipe} from "../../utils/Validation";
+
+
 const router = express.Router();
 
 /**
@@ -47,13 +50,8 @@ router.get('/', async (req: Request, res: Response) => {
  *                 type: string
  *                 example: John Doe
  */
-router.post('/', async (req: Request, res: Response) => {
-  const newCustomer = plainToInstance(CustomerCreateDto, req.body);
-  const errors = await validate(newCustomer);
-
-  if (errors.length > 0) {
-    return res.status(400).json(errors);
-  }
+router.post('/', ValidationPipe(CustomerCreateDto), async (req: Request, res: Response) => {
+  const newCustomer = req.body
   res.json(await customerService.create(newCustomer))
 })
 
@@ -77,16 +75,9 @@ router.post('/', async (req: Request, res: Response) => {
  *                 type: string
  *                 example: John Doe
  */
-router.put('/:id', async (req: Request, res: Response) => {
+router.put('/:id', ValidationPipe(CustomerCreateDto), async (req: Request, res: Response) => {
   const customerId = Number(req.params.id);
-
-  const newCustomer = plainToInstance(CustomerCreateDto, req.body);
-  const errors = await validate(newCustomer);
-
-  if (errors.length > 0) {
-    return res.status(400).json(errors);
-  }
-
+  const newCustomer = req.body
   res.json(await customerService.updateById(customerId, newCustomer))
 })
 

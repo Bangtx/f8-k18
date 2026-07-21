@@ -7,7 +7,10 @@ class CustomerService {
       AppDataSource
         .getRepository(CustomerEntity)
         .createQueryBuilder("customer")
-        .select()
+        .select([
+          "customer.id as id",
+          "customer.name as name",
+        ])
         .where("customer.is_active")
 
     return await query.getRawMany()
@@ -45,6 +48,7 @@ class CustomerService {
       .update(CustomerEntity)
       .set({
         isActive: false,
+        deletedAt: new Date()
       })
       .where("customer.id = :id", {id})
       .returning(["id", "name", "isActive"]);

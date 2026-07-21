@@ -3,6 +3,7 @@ import {plainToInstance} from "class-transformer";
 import {validate} from "class-validator";
 import {v7} from "uuid";
 import {UserCreateDto} from "../../dtos";
+import {ValidationPipe} from "../../utils/Validation";
 
 const router = express.Router();
 
@@ -86,13 +87,8 @@ router.get('/', (req: Request, res: Response) => {
  *       '400':
  *         description: Validation error
  */
-router.post('/', async (req: Request, res: Response) => {
-  const newUser = plainToInstance(UserCreateDto, req.body);
-  const errors = await validate(newUser);
-
-  if (errors.length > 0) {
-    return res.status(400).json(errors);
-  }
+router.post('/', ValidationPipe(UserCreateDto), async (req: Request, res: Response) => {
+  const newUser = req.body
 
   const createdUser = {...newUser, id: v7()};
   users.push(createdUser);
