@@ -1,64 +1,34 @@
-import {AppDataSource} from '../../config/database'
 import {ProductEntity} from "../../entities/ProductEntity";
+import {BaseService} from "../Base";
 
-class ProductService {
+class ProductService extends BaseService {
   async getList() {
-    const query =
-      AppDataSource
-        .getRepository(ProductEntity)
-        .createQueryBuilder("product")
-        .select([
-          "product.id as id",
-          "product.name as name",
-          "product.price as price",
-          "product.description as description",
-        ])
-        .where("product.is_active")
-
-    return await query.getRawMany()
+    return await super.getList([
+      "product.id as id",
+      "product.name as name",
+      "product.price as price",
+      "product.description as description",
+    ], {
+      priceLt: 1000
+    })
   }
 
-  async create(product: any) {
-    const query =
-      AppDataSource
-        .getRepository(ProductEntity)
-        .createQueryBuilder("product")
-        .insert()
-        .into(ProductEntity)
-        .values([product])
-        .returning(["id", "name"])
+  handleFind(query, condition) {
+    let priceLt = null
+    if (condition.priceLt) {
+      priceLt = condition.priceLt
+      delete condition.priceLt
+    }
 
-    return await query.execute()
-  }
+    query = super.handleFind(query, condition);
+    if (priceLt) {
+      query = query.andWhere(`price < :price`, {price: priceLt})
+    }
 
-  async updateById(id: number, product: any) {
-    const query =
-      AppDataSource
-        .getRepository(ProductEntity)
-        .createQueryBuilder("product")
-        .update(product)
-        .where("product.id = :id", {id})
-        .returning(["id", "name"])
-
-    return await query.execute()
-  }
-
-  async deleteById(id: number){
-    const query: any = AppDataSource
-      .getRepository(ProductEntity)
-      .createQueryBuilder("product")
-      .update(ProductEntity)
-      .set({
-        isActive: false,
-        deletedAt: new Date()
-      })
-      .where("product.id = :id", {id})
-      .returning(["id", "name", "isActive"]);
-
-    return await query.execute();
+    return query
   }
 }
 
-const productService = new ProductService()
+const productService = new ProductService(ProductEntity)
 
 export default productService
