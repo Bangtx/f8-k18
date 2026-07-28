@@ -1,0 +1,33 @@
+[
+  {
+    "id": 1,
+    "date": "2026-07-25",
+    "total_amount": "30000000",
+    "details": [
+      {
+        "id": 1,
+        "product": {
+          "id": 23,
+          "name": "I phone 17 promax"
+        },
+        "quantity": 2
+      },
+      {
+        "id": 1,
+        "product": {
+          "id": 25,
+          "name": "Op Lung I Phone 17 Promax"
+        },
+        "quantity": 2
+      }
+    ]
+  }
+]
+
+// const orders = orderService.getList()
+// const orderDetails = orderDetailService.getList({orderId: [2, 3, 4]}) // where order_id (2, 3, 4)
+// for (const order of orders) {
+//    for (const orderDetail of orderDetails) {
+//         if else .....
+//    }
+// }

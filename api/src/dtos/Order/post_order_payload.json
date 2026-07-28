@@ -1,0 +1,14 @@
+{
+  "date": "2026-07-25",
+  "customer_id": 2,
+  "details": [
+    {
+      "product_id": 23,
+      "quantity": 2
+    },
+    {
+      "product_id": 25,
+      "quantity": 2
+    }
+  ]
+}

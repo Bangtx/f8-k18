@@ -23,7 +23,7 @@ export abstract class BaseService {
     return query.where({...condition, isActive: true})
   }
 
-  async getList(selectFields: string[], condition = {}) {
+  async getList(condition = {}) {
     let query = this.handleSelect()
     query = this.handleFind(query, condition)
 

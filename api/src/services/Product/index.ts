@@ -3,12 +3,7 @@ import {BaseService} from "../Base";
 
 class ProductService extends BaseService {
   async getList() {
-    return await super.getList([
-      "product.id as id",
-      "product.name as name",
-      "product.price as price",
-      "product.description as description",
-    ], {
+    return await super.getList( {
       priceLt: 1000
     })
   }
