@@ -56,11 +56,30 @@ router.get('/', async (req: Request, res: Response) => {
  *                 type: string
  *                 example: John Doe *
  *               price:
- *                 type: string
- *                 example: John Doe *
+ *                 type: int
+ *                 example: 1000
  *               description:
  *                 type: string
  *                 example: John Doe
+ *     responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: int
+ *                   example: 10
+ *                 name:
+ *                   type: string
+ *                   example: John Doe *
+ *                 price:
+ *                   type: int
+ *                   example: 100
+ *                 description:
+ *                   type: string
+ *                   example: John Doe
  */
 router.post('/', ValidationPipe(ProductCreateDto), async (req: Request, res: Response) => {
   const newProduct = req.body

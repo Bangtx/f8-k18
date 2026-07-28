@@ -43,6 +43,19 @@ export abstract class BaseService {
     return await query.execute()
   }
 
+  async createMany(data) {
+    const query =
+      AppDataSource
+        .getRepository(this.entity)
+        .createQueryBuilder(this.getTableName())
+        .insert()
+        .into(this.entity)
+        .values(data)
+        .returning(["id"])
+
+    return await query.execute()
+  }
+
   async updateById(id: number, data: any) {
     const query =
       AppDataSource

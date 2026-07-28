@@ -1,13 +1,16 @@
 import express, { type Express } from 'express';
-import {userRouter, customerRouter, productRouter} from './routers'
+import {userRouter, customerRouter, productRouter, orderRouter} from './routers'
 import swaggerJsDoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
 import 'reflect-metadata'
 import {AppDataSource} from "./config/database";
+import { initializeTransactionalContext, addTransactionalDataSource, StorageDriver } from 'typeorm-transactional';
 
 const app: Express = express()
 
 AppDataSource.initialize()
+initializeTransactionalContext({ storageDriver: StorageDriver.ASYNC_LOCAL_STORAGE });
+addTransactionalDataSource(AppDataSource);
 
 const swaggerOptions = {
   definition: {
@@ -34,4 +37,5 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 app.use('/users', userRouter)
 app.use('/customers', customerRouter)
 app.use('/products', productRouter)
+app.use('/orders', orderRouter)
 app.listen(3000)
