@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Quản Lý Trung Tâm Đào Tạo & CRM Sales</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: '#eef2ff',
+                100: '#e0e7ff',
+                500: '#6366f1',
+                600: '#4f46e5',
+                700: '#4338ca',
+                900: '#312e81',
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* Custom scrollbar and sleek visual details */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .tab-active {
+            background-color: #4f46e5;
+            color: #ffffff !important;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+        }
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background: white; color: black; }
+        }
+    </style>
+</head>
+<body class="h-full flex text-slate-800 font-sans antialiased overflow-hidden">
+
+<!-- Sidebar Navigation -->
+<aside class="w-64 bg-slate-900 text-slate-300 flex flex-col shrink-0 z-20 shadow-xl transition-all duration-300 no-print">
+    <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-500/30">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-white text-base leading-tight">EduCRM & Sales</h1>
+                <span class="text-xs text-slate-400 font-medium">Hệ Thống Đào Tạo</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="flex-1 p-3 space-y-1 overflow-y-auto text-sm">
+        <div class="text-xs font-semibold text-slate-500 uppercase px-3 pt-3 pb-1">Tổng quan</div>
+        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition font-medium text-left tab-active">
+            <i class="fa-solid fa-chart-pie w-5 text-center"></i> Dashboard Analytics
+        </button>
+
+        <div class="text-xs font-semibold text-slate-500 uppercase px-3 pt-4 pb-1">Kinh Doanh & Quảng Cáo</div>
+        <button onclick="switchTab('sources')" id="nav-sources" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition font-medium text-left">
+            <i class="fa-solid fa-rectangle-ad w-5 text-center"></i> Nguồn Quảng Cáo
+        </button>
+        <button onclick="switchTab('presales')" id="nav-presales" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition font-medium text-left">
+            <i class="fa-solid fa-filter-circle-dollar w-5 text-center"></i> Data Pre-Sales (Leads)
+        </button>
+        <button onclick="switchTab('saleresults')" id="nav-saleresults" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition font-medium text-left">
+            <i class="fa-solid fa-trophy w-5 text-center"></i> Kết Quả Bán Hàng
+        </button>
+
+        <div class="text-xs font-semibold text-slate-500 uppercase px-3 pt-4 pb-1">Đào Tạo & Học Viên</div>
+        <button onclick="switchTab('classes')" id="nav-classes" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition font-medium text-left">
+            <i class="fa-solid fa-chalkboard-user w-5 text-center"></i> Danh Sách Lớp Học
+        </button>
+        <button onclick="switchTab('studentattendance')" id="nav-studentattendance" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition font-medium text-left">
+            <i class="fa-solid fa-clipboard-user w-5 text-center"></i> Điểm Danh Sinh Viên
+        </button>
+
+        <div class="text-xs font-semibold text-slate-500 uppercase px-3 pt-4 pb-1">Nhân Sự & Luơng</div>
+        <button onclick="switchTab('employees')" id="nav-employees" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition font-medium text-left">
+            <i class="fa-solid fa-users w-5 text-center"></i> Danh Sách Nhân Viên
+        </button>
+        <button onclick="switchTab('stafftimekeeping')" id="nav-stafftimekeeping" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition font-medium text-left">
+            <i class="fa-solid fa-business-time w-5 text-center"></i> Chấm Công Nhân Viên
+        </button>
+        <button onclick="switchTab('payroll')" id="nav-payroll" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition font-medium text-left">
+            <i class="fa-solid fa-file-invoice-dollar w-5 text-center"></i> Tính Lương & Hoa Hồng
+        </button>
+    </nav>
+
+    <!-- User profile section -->
+    <div class="p-4 border-t border-slate-800 flex items-center gap-3 bg-slate-950/50">
+        <div class="w-9 h-9 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center font-bold">
+            AD
+        </div>
+        <div class="truncate flex-1">
+            <div class="text-sm font-semibold text-white truncate">Admin Manager</div>
+            <div class="text-xs text-slate-400 truncate">nguyenphuongnga@center.edu</div>
+        </div>
+    </div>
+</aside>
+
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden bg-slate-50">
+    <!-- Top App Bar -->
+    <header class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-6 shrink-0 shadow-sm no-print">
+        <div class="flex items-center gap-4">
+            <h2 id="page-title" class="text-xl font-bold text-slate-800">Dashboard Analytics</h2>
+            <span class="bg-indigo-50 text-indigo-700 text-xs px-2.5 py-1 rounded-full font-semibold border border-indigo-200/60 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> System Live
+                </span>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <button onclick="openModal('modal-add-lead')" class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-medium text-sm px-4 py-2 rounded-lg shadow-sm transition flex items-center gap-2">
+                <i class="fa-solid fa-plus text-xs"></i> Thêm Lead Mới
+            </button>
+            <button onclick="resetDataToDefault()" title="Khôi phục dữ liệu mẫu" class="bg-slate-100 hover:bg-slate-200 text-slate-600 p-2 rounded-lg transition">
+                <i class="fa-solid fa-rotate-right"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Dynamic Container Views -->
+    <div class="flex-1 overflow-y-auto p-6 space-y-6" id="main-view-container">
+
+        <!-- TAB 1: DASHBOARD ANALYTICS -->
+        <section id="tab-dashboard" class="tab-content space-y-6">
+            <!-- KPI Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Tổng Doanh Thu</p>
+                        <h3 id="kpi-revenue" class="text-2xl font-bold text-slate-800 mt-1">0 VNĐ</h3>
+                        <p class="text-xs text-emerald-600 font-medium mt-1 flex items-center gap-1">
+                            <i class="fa-solid fa-arrow-trend-up"></i> +18.5% so với tháng trước
+                        </p>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-sack-dollar"></i>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Tổng Số Leads (Pre-sales)</p>
+                        <h3 id="kpi-leads" class="text-2xl font-bold text-slate-800 mt-1">0</h3>
+                        <p class="text-xs text-indigo-600 font-medium mt-1">Từ các kênh Google, FB, Zalo</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-users-viewfinder"></i>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Học Viên Đã Đăng Ký</p>
+                        <h3 id="kpi-enrolled" class="text-2xl font-bold text-slate-800 mt-1">0</h3>
+                        <p class="text-xs text-sky-600 font-medium mt-1">Tỷ lệ chuyển đổi: <span id="kpi-conversion">0%</span></p>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-user-check"></i>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Tổng Quỹ Lương & HH</p>
+                        <h3 id="kpi-payroll" class="text-2xl font-bold text-slate-800 mt-1">0 VNĐ</h3>
+                        <p class="text-xs text-amber-600 font-medium mt-1">Gồm lương cứng + 3% hoa hồng</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Charts Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="font-bold text-slate-800">Doanh Thu Theo Lớp Học</h4>
+                        <span class="text-xs text-slate-400">Đơn vị: VNĐ</span>
+                    </div>
+                    <div class="h-72">
+                        <canvas id="chartRevenueByClass"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="font-bold text-slate-800">Tỷ Lệ Leads Theo Nguồn</h4>
+                    </div>
+                    <div class="h-72 flex items-center justify-center">
+                        <canvas id="chartLeadsBySource"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leaderboard & Top Sellers -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-medal text-amber-500"></i> Bảng Xếp Hạng Sales (Doanh Số)
+                    </h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-slate-50 text-slate-500 uppercase text-xs">
+                            <tr>
+                                <th class="p-3 rounded-l-lg">Nhân viên</th>
+                                <th class="p-3">Số Đơn</th>
+                                <th class="p-3">Doanh Số</th>
+                                <th class="p-3 rounded-r-lg text-right">Hoa Hồng (3%)</th>
+                            </tr>
+                            </thead>
+                            <tbody id="dashboard-sales-leaderboard" class="divide-y divide-slate-100">
+                            <!-- Dynamic rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-rose-500"></i> Lý Do Từ Chối Phổ Biến (Pre-Sales)
+                    </h4>
+                    <div id="rejection-reasons-list" class="space-y-3">
+                        <!-- Dynamic stats -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: NGUỒN QUẢNG CÁO (SOURCES) -->
+        <section id="tab-sources" class="tab-content space-y-6 hidden">
+            <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                <div>
+                    <h3 class="font-bold text-slate-800 text-lg">Danh Sách Nguồn Quảng Cáo</h3>
+                    <p class="text-xs text-slate-500">Quản lý hiệu quả tiếp thị từ các kênh quảng cáo</p>
+                </div>
+                <button onclick="openModal('modal-add-source')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> Thêm Nguồn Mới
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5" id="sources-cards-grid">
+                <!-- Cards will be dynamically injected here -->
+            </div>
+        </section>
+
+        <!-- TAB 3: PRE-SALES (DATA KHÁCH HÀNG) -->
+        <section id="tab-presales" class="tab-content space-y-6 hidden">
+            <!-- Filters Bar -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
+                <div class="flex flex-wrap items-center gap-3 flex-1">
+                    <div class="relative min-w-[220px]">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input type="text" id="presale-search" onkeyup="renderPreSalesTable()" placeholder="Tìm tên, SĐT khách hàng..." class="w-full pl-9 pr-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <select id="presale-filter-source" onchange="renderPreSalesTable()" class="border border-slate-200 text-sm rounded-xl px-3 py-2 bg-white focus:outline-none">
+                        <option value="ALL">Tất cả Nguồn Quảng Cáo</option>
+                    </select>
+                    <select id="presale-filter-seller" onchange="renderPreSalesTable()" class="border border-slate-200 text-sm rounded-xl px-3 py-2 bg-white focus:outline-none">
+                        <option value="ALL">Tất cả Seller</option>
+                    </select>
+                    <select id="presale-filter-status" onchange="renderPreSalesTable()" class="border border-slate-200 text-sm rounded-xl px-3 py-2 bg-white focus:outline-none">
+                        <option value="ALL">Tất cả Trạng Thái</option>
+                        <option value="Mới nhận">Mới nhận</option>
+                        <option value="Đã tư vấn">Đã tư vấn</option>
+                        <option value="Đã chốt">Đã chốt (Thành công)</option>
+                        <option value="Từ chối">Từ chối</option>
+                    </select>
+                </div>
+                <button onclick="openModal('modal-add-lead')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-xl transition flex items-center gap-2 shrink-0">
+                    <i class="fa-solid fa-user-plus"></i> Thêm Pre-Sales Lead
+                </button>
+            </div>
+
+            <!-- Pre Sales Table -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead class="bg-slate-100 text-slate-600 uppercase text-xs font-semibold">
+                        <tr>
+                            <th class="p-4">Khách Hàng / SĐT</th>
+                            <th class="p-4">Nguồn QC</th>
+                            <th class="p-4">Mục Đích Học</th>
+                            <th class="p-4">Đối Tượng (Who are you)</th>
+                            <th class="p-4">Seller Phụ Trách</th>
+                            <th class="p-4">Trạng Thái</th>
+                            <th class="p-4">Lý Do Từ Chối</th>
+                            <th class="p-4 text-center">Thao Tác</th>
+                        </tr>
+                        </thead>
+                        <tbody id="presales-table-body" class="divide-y divide-slate-100">
+                        <!-- Dynamic Rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: SALE RESULTS (KẾT QUẢ BÁN HÀNG) -->
+        <section id="tab-saleresults" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                <div>
+                    <h3 class="font-bold text-slate-800 text-lg">Thống Kê Kết Quả Bán Hàng & Doanh Thu</h3>
+                    <p class="text-xs text-slate-500">Danh sách học viên đã đóng học phí chính thức</p>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs text-slate-500 block">Tổng Doanh Thu Đã Thu:</span>
+                    <span id="saleresults-total-revenue" class="text-xl font-bold text-emerald-600">0 VNĐ</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead class="bg-slate-100 text-slate-600 uppercase text-xs font-semibold">
+                        <tr>
+                            <th class="p-4">Học Viên</th>
+                            <th class="p-4">Số Điện Thoại</th>
+                            <th class="p-4">Nguồn QC</th>
+                            <th class="p-4">Mục Đích / Đối Tượng</th>
+                            <th class="p-4">Seller Chốt</th>
+                            <th class="p-4">Lớp Học</th>
+                            <th class="p-4 font-bold text-emerald-700">Doanh Thu (VNĐ)</th>
+                        </tr>
+                        </thead>
+                        <tbody id="saleresults-table-body" class="divide-y divide-slate-100">
+                        <!-- Dynamic Rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: LỚP HỌC (CLASSES) -->
+        <section id="tab-classes" class="tab-content space-y-6 hidden">
+            <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                <div>
+                    <h3 class="font-bold text-slate-800 text-lg">Quản Lý Khóa Học & Lớp Học</h3>
+                    <p class="text-xs text-slate-500">Các lớp đã mở và sắp khai giảng tại trung tâm</p>
+                </div>
+                <button onclick="openModal('modal-add-class')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> Tạo Lớp Mới
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="classes-cards-grid">
+                <!-- Dynamic class cards -->
+            </div>
+        </section>
+
+        <!-- TAB 6: ĐIỂM DANH SINH VIÊN -->
+        <section id="tab-studentattendance" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <label class="text-sm font-semibold text-slate-700">Chọn Lớp Học:</label>
+                    <select id="attendance-class-select" onchange="renderStudentAttendance()" class="border border-slate-200 rounded-xl px-4 py-2 text-sm bg-white font-medium focus:outline-none focus:border-indigo-500">
+                        <!-- Options dynamically populated -->
+                    </select>
+                </div>
+                <div class="flex items-center gap-3">
+                    <input type="date" id="attendance-date" onchange="renderStudentAttendance()" class="border border-slate-200 rounded-xl px-3 py-2 text-sm bg-white">
+                    <button onclick="saveStudentAttendance()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-4 py-2 rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-floppy-disk"></i> Lưu Điểm Danh
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+                <h4 id="attendance-class-title" class="font-bold text-slate-800 text-base mb-4">Danh Sách Học Viên</h4>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead class="bg-slate-100 text-slate-600 uppercase text-xs font-semibold">
+                        <tr>
+                            <th class="p-3">STT</th>
+                            <th class="p-3">Họ và Tên Học Viên</th>
+                            <th class="p-3">Số Điện Thoại</th>
+                            <th class="p-3 text-center">Trạng Thái Đi Học</th>
+                            <th class="p-3">Ghi Chú</th>
+                        </tr>
+                        </thead>
+                        <tbody id="student-attendance-table-body" class="divide-y divide-slate-100">
+                        <!-- Dynamic attendance rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 7: DANH SÁCH NHÂN VIÊN -->
+        <section id="tab-employees" class="tab-content space-y-6 hidden">
+            <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                <div>
+                    <h3 class="font-bold text-slate-800 text-lg">Danh Sách Nhân Viên Công Ty</h3>
+                    <p class="text-xs text-slate-500">Quản lý đội ngũ Sales, Giảng Viên, Admin</p>
+                </div>
+                <button onclick="openModal('modal-add-employee')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-user-plus"></i> Thêm Nhân Viên
+                </button>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead class="bg-slate-100 text-slate-600 uppercase text-xs font-semibold">
+                        <tr>
+                            <th class="p-4">Mã NV</th>
+                            <th class="p-4">Họ và Tên</th>
+                            <th class="p-4">Chức Vũ (Position)</th>
+                            <th class="p-4">Số Điện Thoại</th>
+                            <th class="p-4 font-bold text-indigo-700">Lương Cơ Bản (Salary)</th>
+                            <th class="p-4">% Hoa Hồng Sales</th>
+                            <th class="p-4 text-center">Thao tác</th>
+                        </tr>
+                        </thead>
+                        <tbody id="employees-table-body" class="divide-y divide-slate-100">
+                        <!-- Dynamic employee rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 8: CHẤM CÔNG NHÂN VIÊN -->
+        <section id="tab-stafftimekeeping" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex justify-between items-center">
+                <div>
+                    <h3 class="font-bold text-slate-800 text-lg">Bảng Chấm Công Đi Làm</h3>
+                    <p class="text-xs text-slate-500">Điểm danh nhân viên hằng ngày để tính công phiếu lương</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <input type="date" id="staff-attendance-date" onchange="renderStaffTimekeeping()" class="border border-slate-200 rounded-xl px-3 py-2 text-sm bg-white">
+                    <button onclick="saveStaffTimekeeping()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-4 py-2 rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-check-double"></i> Lưu Chấm Công
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead class="bg-slate-100 text-slate-600 uppercase text-xs font-semibold">
+                        <tr>
+                            <th class="p-4">Mã NV</th>
+                            <th class="p-4">Họ và Tên</th>
+                            <th class="p-4">Chức Vũ</th>
+                            <th class="p-4 text-center">Trạng Thái Làm Việc</th>
+                            <th class="p-4">Giờ Vào Ca</th>
+                            <th class="p-4">Ghi Chú Chấm Công</th>
+                        </tr>
+                        </thead>
+                        <tbody id="staff-timekeeping-table-body" class="divide-y divide-slate-100">
+                        <!-- Dynamic rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 9: PHIẾU LƯƠNG & HOA HỒNG (PAYROLL) -->
+        <section id="tab-payroll" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div class="flex flex-wrap justify-between items-center gap-4">
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-lg">Bảng Tính Lương & Doanh Số Cân Đối TT</h3>
+                        <p class="text-xs text-slate-500">Tự động tính Lương cứng + Hoa hồng (3%) - BHXH (8%), BHTN (1%), BHYT (1.5%) & Thuế TNCN (TopCV reference)</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-900 text-white text-sm font-medium px-4 py-2 rounded-xl transition flex items-center gap-2">
+                            <i class="fa-solid fa-print"></i> In Bảng Lương
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Config Settings for Tax & Deductions -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
+                    <div>
+                        <label class="font-semibold text-slate-600 block mb-1">BHXH (Bảo hiểm xã hội):</label>
+                        <span class="font-bold text-slate-800 text-sm">8%</span>
+                    </div>
+                    <div>
+                        <label class="font-semibold text-slate-600 block mb-1">BHTN (Bảo hiểm thất nghiệp):</label>
+                        <span class="font-bold text-slate-800 text-sm">1%</span>
+                    </div>
+                    <div>
+                        <label class="font-semibold text-slate-600 block mb-1">BHYT (Bảo hiểm y tế):</label>
+                        <span class="font-bold text-slate-800 text-sm">1.5%</span>
+                    </div>
+                    <div>
+                        <label class="font-semibold text-slate-600 block mb-1">Giảm trừ bản thân / Phụ thuộc:</label>
+                        <span class="font-bold text-indigo-600 text-sm" id="tax-relief-info">15,500,000đ + 6,200,000đ/người</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payroll Summary Table -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead class="bg-slate-100 text-slate-600 uppercase text-xs font-semibold">
+                        <tr>
+                            <th class="p-4">Nhân Viên</th>
+                            <th class="p-4">Lương Cơ Bản</th>
+                            <th class="p-4">Doanh Số Bán</th>
+                            <th class="p-4 font-semibold text-indigo-600">Hoa Hồng (3%)</th>
+                            <th class="p-4 font-semibold text-slate-700">Tổng Thu Nhập (Gross)</th>
+                            <th class="p-4 text-rose-600">Tổng Bảo Hiểm (10.5%)</th>
+                            <th class="p-4 text-amber-600">Thuế TNCN</th>
+                            <th class="p-4 font-bold text-emerald-700 text-right">Lương Thực Nhận (NET)</th>
+                            <th class="p-4 text-center">Chi Tiết</th>
+                        </tr>
+                        </thead>
+                        <tbody id="payroll-table-body" class="divide-y divide-slate-100">
+                        <!-- Dynamic payroll calculated rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- MODAL: THÊM PRE-SALES LEAD -->
+<div id="modal-add-lead" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
+        <div class="p-5 bg-gradient-to-r from-indigo-600 to-violet-600 text-white flex justify-between items-center">
+            <h3 class="font-bold text-lg flex items-center gap-2"><i class="fa-solid fa-user-plus"></i> Thêm Lead Pre-Sales Mới</h3>
+            <button onclick="closeModal('modal-add-lead')" class="text-white/80 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form id="form-add-lead" onsubmit="handleSaveLead(event)" class="p-6 space-y-4 overflow-y-auto flex-1">
+            <div>
+                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Tên Khách Hàng <span class="text-rose-500">*</span></label>
+                <input type="text" id="lead-input-name" required placeholder="VD: Nguyễn Văn A" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Số Điện Thoại <span class="text-rose-500">*</span></label>
+                    <input type="tel" id="lead-input-phone" required placeholder="012345678" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Nguồn Quảng Cáo</label>
+                    <select id="lead-input-source" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+                        <!-- Dynamic sources option -->
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Mục Đích Học</label>
+                <input type="text" id="lead-input-purpose" placeholder="VD: Học để đi làm, Nâng cao tay nghề..." class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Đối Tượng (Who are you)</label>
+                <input type="text" id="lead-input-who" placeholder="VD: Sinh viên trái ngành, Người đi làm..." class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Seller Phụ Trách</label>
+                    <select id="lead-input-seller" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+                        <!-- Dynamic sellers -->
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Trạng Thái</label>
+                    <select id="lead-input-status" onchange="toggleRejectionReasonInput()" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+                        <option value="Mới nhận">Mới nhận</option>
+                        <option value="Đã tư vấn">Đã tư vấn</option>
+                        <option value="Đã chốt">Đã chốt (Thành công)</option>
+                        <option value="Từ chối">Từ chối</option>
+                    </select>
+                </div>
+            </div>
+            <div id="rejection-reason-container" class="hidden">
+                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Lý Do Từ Chối</label>
+                <input type="text" id="lead-input-rejection" placeholder="VD: Lịch học không phù hợp, Học phí cao..." class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+            </div>
+            <div class="pt-4 flex justify-end gap-3">
+                <button type="button" onclick="closeModal('modal-add-lead')" class="px-4 py-2 border border-slate-200 text-slate-600 rounded-xl text-sm font-medium hover:bg-slate-50">Hủy</button>
+                <button type="submit" class="px-5 py-2 bg-indigo-600 text-white rounded-xl text-sm font-medium hover:bg-indigo-700 shadow-md">Lưu Khách Hàng</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL: CONVERT LEAD TO SALE RESULT (CHỐT ĐƠN) -->
+<div id="modal-convert-sale" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden flex flex-col">
+        <div class="p-5 bg-emerald-600 text-white flex justify-between items-center">
+            <h3 class="font-bold text-lg flex items-center gap-2"><i class="fa-solid fa-circle-check"></i> Chốt Đơn Đăng Ký Học</h3>
+            <button onclick="closeModal('modal-convert-sale')" class="text-white/80 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form id="form-convert-sale" onsubmit="handleConfirmSale(event)" class="p-6 space-y-4">
+            <input type="hidden" id="convert-lead-id">
+            <div>
+                <p class="text-xs text-slate-500">Khách hàng:</p>
+                <p id="convert-lead-name" class="font-bold text-slate-800 text-base">Nguyễn Văn A</p>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Xếp Vào Lớp Học <span class="text-rose-500">*</span></label>
+                <select id="convert-input-class" required class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-emerald-500">
+                    <!-- Dynamic options -->
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Số Tiền Thu (Doanh Thu VNĐ) <span class="text-rose-500">*</span></label>
+                <input type="number" id="convert-input-amount" required placeholder="18000000" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-emerald-500 font-bold text-emerald-700">
+            </div>
+            <div class="pt-4 flex justify-end gap-3">
+                <button type="button" onclick="closeModal('modal-convert-sale')" class="px-4 py-2 border border-slate-200 text-slate-600 rounded-xl text-sm font-medium hover:bg-slate-50">Hủy</button>
+                <button type="submit" class="px-5 py-2 bg-emerald-600 text-white rounded-xl text-sm font-medium hover:bg-emerald-700 shadow-md">Xác Nhận Đã Thu Tiền</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL: CHI TIẾT PHIẾU LƯƠNG -->
+<div id="modal-payslip-detail" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden flex flex-col">
+        <div class="p-5 bg-slate-900 text-white flex justify-between items-center">
+            <h3 class="font-bold text-lg flex items-center gap-2"><i class="fa-solid fa-receipt"></i> Chi Tiết Phiếu Lương</h3>
+            <button onclick="closeModal('modal-payslip-detail')" class="text-white/80 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="payslip-detail-content" class="p-6 space-y-4">
+            <!-- Dynamically populated payslip detail -->
+        </div>
+        <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-end gap-3 no-print">
+            <button onclick="window.print()" class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm font-medium hover:bg-indigo-700">In Phiếu Lương</button>
+            <button onclick="closeModal('modal-payslip-detail')" class="px-4 py-2 bg-slate-200 text-slate-700 rounded-xl text-sm font-medium">Đóng</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: THÊM NHÂN VIÊN MỚI -->
+<div id="modal-add-employee" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden flex flex-col">
+        <div class="p-5 bg-indigo-600 text-white flex justify-between items-center">
+            <h3 class="font-bold text-lg flex items-center gap-2"><i class="fa-solid fa-user-plus"></i> Thêm Nhân Viên Mới</h3>
+            <button onclick="closeModal('modal-add-employee')" class="text-white/80 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form onsubmit="handleSaveEmployee(event)" class="p-6 space-y-4">
+            <div>
+                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Họ và Tên <span class="text-rose-500">*</span></label>
+                <input type="text" id="emp-input-name" required placeholder="VD: Nguyễn Phương Nga" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Chức Vũ (Position)</label>
+                <select id="emp-input-position" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+                    <option value="Sales">Sales Consultant</option>
+                    <option value="Giảng Viên">Giảng Viên (Trainer)</option>
+                    <option value="HR / Thu Ngân">HR / Lễ Tân</option>
+                    <option value="Quản Lý">Quản Lý Trung Tâm</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Số Điện Thoại</label>
+                <input type="tel" id="emp-input-phone" placeholder="012345678" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Lương Cơ Bản (VNĐ)</label>
+                    <input type="number" id="emp-input-salary" required placeholder="20000000" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">% Hoa Hồng</label>
+                    <input type="number" step="0.1" id="emp-input-commission" value="3" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+                </div>
+            </div>
+            <div class="pt-4 flex justify-end gap-3">
+                <button type="button" onclick="closeModal('modal-add-employee')" class="px-4 py-2 border border-slate-200 text-slate-600 rounded-xl text-sm font-medium hover:bg-slate-50">Hủy</button>
+                <button type="submit" class="px-5 py-2 bg-indigo-600 text-white rounded-xl text-sm font-medium hover:bg-indigo-700 shadow-md">Lưu Nhân Viên</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+  /* APP STATE & DATA INITIALIZATION */
+  const DEFAULT_SOURCES = [
+    { id: 'src-1', name: 'Zalo OA', color: 'bg-blue-500', icon: 'fa-comments' },
+    { id: 'src-2', name: 'Google Ads', color: 'bg-emerald-500', icon: 'fa-google' },
+    { id: 'src-3', name: 'Facebook Ads', color: 'bg-indigo-600', icon: 'fa-facebook' },
+    { id: 'src-4', name: 'Website', color: 'bg-purple-500', icon: 'fa-globe' }
+  ];
+
+  const DEFAULT_EMPLOYEES = [
+    { id: 'EMP01', name: 'Nguyễn Phương Nga', position: 'Sales', phone: '012345678', salary: 20000000, commissionRate: 0.03, dependents: 1 },
+    { id: 'EMP02', name: 'Trần Văn Hoàng', position: 'Sales', phone: '0987654321', salary: 15000000, commissionRate: 0.03, dependents: 0 },
+    { id: 'EMP03', name: 'Lê Thị Thu', position: 'Giảng Viên', phone: '0912345678', salary: 25000000, commissionRate: 0, dependents: 1 }
+  ];
+
+  const DEFAULT_CLASSES = [
+    { id: 'k19', code: 'k19', name: 'Fullstack K19', schedule: 'T2 - T4 - T6 (18:30 - 21:00)', trainer: 'Lê Thị Thu', tuition: 18000000 },
+    { id: 'k20', code: 'k20', name: 'Frontend React K20', schedule: 'T3 - T5 - T7 (19:00 - 21:30)', trainer: 'Lê Thị Thu', tuition: 15000000 },
+    { id: 'k08', code: 'k08', name: 'Data Analyst K08', schedule: 'T7 - CN (09:00 - 12:00)', trainer: 'Nguyễn Văn Minh', tuition: 16000000 }
+  ];
+
+  const DEFAULT_PRESALES = [
+    {
+      id: 'lead-1',
+      name: 'Nguyễn Văn A',
+      source: 'Google Ads',
+      phone: '012345678',
+      purpose: 'Học để đi làm',
+      who: 'Sinh viên trái ngành',
+      seller: 'Nguyễn Phương Nga',
+      status: 'Đã chốt',
+      rejectionReason: '',
+      classId: 'k19',
+      revenue: 18000000
+    },
+    {
+      id: 'lead-2',
+      name: 'Trần Thị Bích',
+      source: 'Facebook Ads',
+      phone: '0905123456',
+      purpose: 'Chuyển ngành IT',
+      who: 'Người đi làm kế toán',
+      seller: 'Nguyễn Phương Nga',
+      status: 'Mới nhận',
+      rejectionReason: '',
+      classId: '',
+      revenue: 0
+    },
+    {
+      id: 'lead-3',
+      name: 'Lê Minh Cường',
+      source: 'Zalo OA',
+      phone: '0938888999',
+      purpose: 'Nâng cao tay nghề',
+      who: 'Sinh viên năm cuối',
+      seller: 'Trần Văn Hoàng',
+      status: 'Từ chối',
+      rejectionReason: 'Lịch học không phù hợp',
+      classId: '',
+      revenue: 0
+    }
+  ];
+
+  // Global Data Store
+  let appData = {
+    sources: JSON.parse(localStorage.getItem('edu_sources')) || DEFAULT_SOURCES,
+    employees: JSON.parse(localStorage.getItem('edu_employees')) || DEFAULT_EMPLOYEES,
+    classes: JSON.parse(localStorage.getItem('edu_classes')) || DEFAULT_CLASSES,
+    preSales: JSON.parse(localStorage.getItem('edu_presales')) || DEFAULT_PRESALES,
+    studentAttendance: JSON.parse(localStorage.getItem('edu_student_attendance')) || {},
+    staffAttendance: JSON.parse(localStorage.getItem('edu_staff_attendance')) || {}
+  };
+
+  let chartRevenueInstance = null;
+  let chartSourcesInstance = null;
+
+  // Initialize App
+  document.addEventListener('DOMContentLoaded', () => {
+    // Set today date
+    const todayStr = new Date().toISOString().split('T')[0];
+    document.getElementById('attendance-date').value = todayStr;
+    document.getElementById('staff-attendance-date').value = todayStr;
+
+    saveToLocalStorage();
+    populateDropdowns();
+    renderAllTabs();
+    initCharts();
+  });
+
+  function saveToLocalStorage() {
+    localStorage.setItem('edu_sources', JSON.stringify(appData.sources));
+    localStorage.setItem('edu_employees', JSON.stringify(appData.employees));
+    localStorage.setItem('edu_classes', JSON.stringify(appData.classes));
+    localStorage.setItem('edu_presales', JSON.stringify(appData.preSales));
+    localStorage.setItem('edu_student_attendance', JSON.stringify(appData.studentAttendance));
+    localStorage.setItem('edu_staff_attendance', JSON.stringify(appData.staffAttendance));
+  }
+
+  function resetDataToDefault() {
+    if (confirm("Khôi phục toàn bộ dữ liệu mẫu ban đầu?")) {
+      localStorage.clear();
+      appData.sources = DEFAULT_SOURCES;
+      appData.employees = DEFAULT_EMPLOYEES;
+      appData.classes = DEFAULT_CLASSES;
+      appData.preSales = DEFAULT_PRESALES;
+      appData.studentAttendance = {};
+      appData.staffAttendance = {};
+      saveToLocalStorage();
+      populateDropdowns();
+      renderAllTabs();
+      initCharts();
+    }
+  }
+
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('tab-active'));
+
+    const targetTab = document.getElementById(`tab-${tabId}`);
+    const targetNav = document.getElementById(`nav-${tabId}`);
+
+    if (targetTab) targetTab.classList.remove('hidden');
+    if (targetNav) targetNav.classList.add('tab-active');
+
+    // Update Page Title
+    const titles = {
+      dashboard: 'Dashboard Analytics',
+      sources: 'Nguồn Quảng Cáo (Marketing Sources)',
+      presales: 'Data Pre-Sales (Khách Hàng Leads)',
+      saleresults: 'Kết Quả Bán Hàng & Doanh Thu',
+      classes: 'Danh Sách Lớp Học',
+      studentattendance: 'Điểm Danh Sinh Viên',
+      employees: 'Danh Sách Nhân Viên',
+      stafftimekeeping: 'Chấm Công Nhân Viên',
+      payroll: 'Bảng Tính Lương & Hoa Hồng'
+    };
+    document.getElementById('page-title').innerText = titles[tabId] || 'Hệ Thống CRM';
+
+    // Refresh charts or subcomponents
+    if (tabId === 'dashboard') initCharts();
+  }
+
+  function renderAllTabs() {
+    renderDashboard();
+    renderSources();
+    renderPreSalesTable();
+    renderSaleResults();
+    renderClasses();
+    renderStudentAttendance();
+    renderEmployees();
+    renderStaffTimekeeping();
+    renderPayroll();
+  }
+
+  /* Populate Dynamic Select Inputs */
+  function populateDropdowns() {
+    const sourceSelect = document.getElementById('lead-input-source');
+    const filterSource = document.getElementById('presale-filter-source');
+    sourceSelect.innerHTML = appData.sources.map(s => `<option value="${s.name}">${s.name}</option>`).join('');
+    filterSource.innerHTML = '<option value="ALL">Tất cả Nguồn QC</option>' + appData.sources.map(s => `<option value="${s.name}">${s.name}</option>`).join('');
+
+    const sellerSelect = document.getElementById('lead-input-seller');
+    const filterSeller = document.getElementById('presale-filter-seller');
+    const salesStaff = appData.employees.filter(e => e.position === 'Sales' || e.position === 'Quản Lý');
+
+    sellerSelect.innerHTML = salesStaff.map(e => `<option value="${e.name}">${e.name}</option>`).join('');
+    filterSeller.innerHTML = '<option value="ALL">Tất cả Seller</option>' + salesStaff.map(e => `<option value="${e.name}">${e.name}</option>`).join('');
+
+    const classSelectConvert = document.getElementById('convert-input-class');
+    const classSelectAttend = document.getElementById('attendance-class-select');
+
+    const classOptions = appData.classes.map(c => `<option value="${c.id}">${c.name} (${c.code}) - ${c.tuition.toLocaleString()}đ</option>`).join('');
+    classSelectConvert.innerHTML = classOptions;
+    classSelectAttend.innerHTML = classOptions;
+  }
+
+  function renderDashboard() {
+    // Calculate Total Revenue
+    const totalRevenue = appData.preSales
+      .filter(l => l.status === 'Đã chốt')
+      .reduce((sum, l) => sum + (l.revenue || 0), 0);
+
+    const totalLeads = appData.preSales.length;
+    const enrolledCount = appData.preSales.filter(l => l.status === 'Đã chốt').length;
+    const convRate = totalLeads > 0 ? ((enrolledCount / totalLeads) * 100).toFixed(1) : 0;
+
+    // Payroll Total
+    let totalPayroll = 0;
+    appData.employees.forEach(emp => {
+      const salesRevenue = appData.preSales
+        .filter(l => l.seller === emp.name && l.status === 'Đã chốt')
+        .reduce((s, l) => s + (l.revenue || 0), 0);
+      const commission = salesRevenue * (emp.commissionRate || 0);
+      totalPayroll += emp.salary + commission;
+    });
+
+    document.getElementById('kpi-revenue').innerText = totalRevenue.toLocaleString('vi-VN') + ' VNĐ';
+    document.getElementById('kpi-leads').innerText = totalLeads;
+    document.getElementById('kpi-enrolled').innerText = enrolledCount;
+    document.getElementById('kpi-conversion').innerText = convRate + '%';
+    document.getElementById('kpi-payroll').innerText = Math.round(totalPayroll).toLocaleString('vi-VN') + ' VNĐ';
+
+    // Leaderboard
+    const salesMap = {};
+    appData.employees.filter(e => e.position === 'Sales').forEach(e => {
+      salesMap[e.name] = { count: 0, revenue: 0, commission: 0 };
+    });
+
+    appData.preSales.filter(l => l.status === 'Đã chốt').forEach(l => {
+      if (!salesMap[l.seller]) salesMap[l.seller] = { count: 0, revenue: 0, commission: 0 };
+      salesMap[l.seller].count++;
+      salesMap[l.seller].revenue += l.revenue || 0;
+      salesMap[l.seller].commission += (l.revenue || 0) * 0.03;
+    });
+
+    const leaderboardHtml = Object.keys(salesMap).map(sellerName => `
+                <tr>
+                    <td class="p-3 font-medium text-slate-800 flex items-center gap-2">
+                        <div class="w-7 h-7 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs">${sellerName.substring(0, 1)}</div>
+                        ${sellerName}
+                    </td>
+                    <td class="p-3 font-semibold text-slate-600">${salesMap[sellerName].count} đơn</td>
+                    <td class="p-3 font-bold text-emerald-600">${salesMap[sellerName].revenue.toLocaleString('vi-VN')} VNĐ</td>
+                    <td class="p-3 font-bold text-indigo-600 text-right">${salesMap[sellerName].commission.toLocaleString('vi-VN')} VNĐ</td>
+                </tr>
+            `).join('');
+
+    document.getElementById('dashboard-sales-leaderboard').innerHTML = leaderboardHtml || `<tr><td colspan="4" class="p-4 text-center text-slate-400">Chưa có dữ liệu</td></tr>`;
+
+    // Rejection reasons breakdown
+    const rejections = appData.preSales.filter(l => l.status === 'Từ chối' && l.rejectionReason);
+    const reasonCounts = {};
+    rejections.forEach(r => {
+      reasonCounts[r.rejectionReason] = (reasonCounts[r.rejectionReason] || 0) + 1;
+    });
+
+    const rejectionHtml = Object.keys(reasonCounts).map(reason => `
+                <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs font-medium text-slate-700 flex items-center gap-2">
+                        <i class="fa-solid fa-circle text-[8px] text-rose-500"></i> ${reason}
+                    </span>
+                    <span class="text-xs font-bold bg-rose-100 text-rose-700 px-2 py-0.5 rounded-full">${reasonCounts[reason]} khách</span>
+                </div>
+            `).join('');
+
+    document.getElementById('rejection-reasons-list').innerHTML = rejectionHtml || `<div class="p-4 text-xs text-slate-400 italic text-center">Chưa có thông tin từ chối</div>`;
+  }
+
+  function initCharts() {
+    // Chart 1: Revenue by Class
+    const classRevMap = {};
+    appData.classes.forEach(c => classRevMap[c.name] = 0);
+
+    appData.preSales.filter(l => l.status === 'Đã chốt').forEach(l => {
+      const cls = appData.classes.find(c => c.id === l.classId);
+      if (cls) {
+        classRevMap[cls.name] = (classRevMap[cls.name] || 0) + (l.revenue || 0);
+      }
+    });
+
+    const classLabels = Object.keys(classRevMap);
+    const classData = Object.values(classRevMap);
+
+    if (chartRevenueInstance) chartRevenueInstance.destroy();
+    const ctxRev = document.getElementById('chartRevenueByClass').getContext('2d');
+    chartRevenueInstance = new Chart(ctxRev, {
+      type: 'bar',
+      data: {
+        labels: classLabels,
+        datasets: [{
+          label: 'Doanh Thu (VNĐ)',
+          data: classData,
+          backgroundColor: '#6366f1',
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    // Chart 2: Leads by Source
+    const sourceMap = {};
+    appData.sources.forEach(s => sourceMap[s.name] = 0);
+    appData.preSales.forEach(l => {
+      sourceMap[l.source] = (sourceMap[l.source] || 0) + 1;
+    });
+
+    if (chartSourcesInstance) chartSourcesInstance.destroy();
+    const ctxSrc = document.getElementById('chartLeadsBySource').getContext('2d');
+    chartSourcesInstance = new Chart(ctxSrc, {
+      type: 'doughnut',
+      data: {
+        labels: Object.keys(sourceMap),
+        datasets: [{
+          data: Object.values(sourceMap),
+          backgroundColor: ['#3b82f6', '#10b981', '#6366f1', '#a855f7', '#f59e0b']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom' } }
+      }
+    });
+  }
+
+  function renderSources() {
+    const container = document.getElementById('sources-cards-grid');
+    container.innerHTML = appData.sources.map(src => {
+      const leadCount = appData.preSales.filter(l => l.source === src.name).length;
+      const convertedCount = appData.preSales.filter(l => l.source === src.name && l.status === 'Đã chốt').length;
+      const totalRev = appData.preSales
+        .filter(l => l.source === src.name && l.status === 'Đã chốt')
+        .reduce((sum, l) => sum + (l.revenue || 0), 0);
+
+      return `
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl ${src.color} text-white flex items-center justify-center text-lg shadow-md">
+                                    <i class="fa-brands ${src.icon} fa-solid"></i>
+                                </div>
+                                <h4 class="font-bold text-slate-800 text-base">${src.name}</h4>
+                            </div>
+                            <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-medium">Hoạt động</span>
+                        </div>
+                        <div class="space-y-2 border-t border-slate-100 pt-3">
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-500">Số Leads mang về:</span>
+                                <span class="font-bold text-slate-800">${leadCount} khách</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-500">Đã chốt đơn:</span>
+                                <span class="font-bold text-emerald-600">${convertedCount} học viên</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-500">Doanh thu tạo ra:</span>
+                                <span class="font-bold text-indigo-600">${totalRev.toLocaleString('vi-VN')} VNĐ</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+    }).join('');
+  }
+
+  function renderPreSalesTable() {
+    const tbody = document.getElementById('presales-table-body');
+    const search = document.getElementById('presale-search').value.toLowerCase();
+    const sourceFilter = document.getElementById('presale-filter-source').value;
+    const sellerFilter = document.getElementById('presale-filter-seller').value;
+    const statusFilter = document.getElementById('presale-filter-status').value;
+
+    const filtered = appData.preSales.filter(item => {
+      const matchSearch = item.name.toLowerCase().includes(search) || item.phone.includes(search);
+      const matchSource = sourceFilter === 'ALL' || item.source === sourceFilter;
+      const matchSeller = sellerFilter === 'ALL' || item.seller === sellerFilter;
+      const matchStatus = statusFilter === 'ALL' || item.status === statusFilter;
+      return matchSearch && matchSource && matchSeller && matchStatus;
+    });
+
+    tbody.innerHTML = filtered.map(item => {
+      let statusBadge = '';
+      if (item.status === 'Mới nhận') statusBadge = '<span class="bg-blue-100 text-blue-700 text-xs px-2.5 py-1 rounded-full font-semibold">Mới nhận</span>';
+      else if (item.status === 'Đã tư vấn') statusBadge = '<span class="bg-amber-100 text-amber-700 text-xs px-2.5 py-1 rounded-full font-semibold">Đã tư vấn</span>';
+      else if (item.status === 'Đã chốt') statusBadge = '<span class="bg-emerald-100 text-emerald-700 text-xs px-2.5 py-1 rounded-full font-semibold">Đã chốt đơn</span>';
+      else if (item.status === 'Từ chối') statusBadge = '<span class="bg-rose-100 text-rose-700 text-xs px-2.5 py-1 rounded-full font-semibold">Từ chối</span>';
+
+      return `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="p-4">
+                            <div class="font-bold text-slate-800">${item.name}</div>
+                            <div class="text-xs text-indigo-600 font-mono">${item.phone}</div>
+                        </td>
+                        <td class="p-4 text-xs font-medium text-slate-600">${item.source}</td>
+                        <td class="p-4 text-xs text-slate-700">${item.purpose || '-'}</td>
+                        <td class="p-4 text-xs text-slate-700">${item.who || '-'}</td>
+                        <td class="p-4 text-xs font-semibold text-slate-800">${item.seller || 'Chưa gán'}</td>
+                        <td class="p-4">${statusBadge}</td>
+                        <td class="p-4 text-xs text-rose-600 font-medium">${item.rejectionReason || '-'}</td>
+                        <td class="p-4 text-center space-x-1">
+                            ${item.status !== 'Đã chốt' ? `
+                                <button onclick="openConvertModal('${item.id}')" title="Chốt đơn thu tiền" class="bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white px-2.5 py-1.5 rounded-lg text-xs font-semibold transition">
+                                    <i class="fa-solid fa-dollar-sign"></i> Chốt đơn
+                                </button>
+                            ` : '<span class="text-xs text-emerald-600 font-bold"><i class="fa-solid fa-circle-check"></i> Đã vào lớp</span>'}
+                            <button onclick="deleteLead('${item.id}')" title="Xóa" class="text-slate-400 hover:text-rose-600 p-1">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+    }).join('');
+  }
+
+  function renderSaleResults() {
+    const tbody = document.getElementById('saleresults-table-body');
+    const convertedLeads = appData.preSales.filter(l => l.status === 'Đã chốt');
+
+    const totalRev = convertedLeads.reduce((s, l) => s + (l.revenue || 0), 0);
+    document.getElementById('saleresults-total-revenue').innerText = totalRev.toLocaleString('vi-VN') + ' VNĐ';
+
+    tbody.innerHTML = convertedLeads.map(item => {
+      const cls = appData.classes.find(c => c.id === item.classId);
+      const className = cls ? `${cls.name} (${cls.code})` : 'Lớp đã phân công';
+
+      return `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="p-4 font-bold text-slate-800">${item.name}</td>
+                        <td class="p-4 font-mono text-xs text-indigo-600">${item.phone}</td>
+                        <td class="p-4 text-xs text-slate-600">${item.source}</td>
+                        <td class="p-4 text-xs text-slate-600">
+                            <div>${item.purpose}</div>
+                            <div class="text-slate-400 font-italic">${item.who}</div>
+                        </td>
+                        <td class="p-4 text-xs font-semibold text-slate-800">${item.seller}</td>
+                        <td class="p-4 text-xs font-bold text-indigo-700 bg-indigo-50/50 rounded-xl">${className}</td>
+                        <td class="p-4 font-bold text-emerald-600 text-sm">${(item.revenue || 0).toLocaleString('vi-VN')} VNĐ</td>
+                    </tr>
+                `;
+    }).join('') || `<tr><td colspan="7" class="p-6 text-center text-slate-400">Chưa có kết quả bán hàng chính thức</td></tr>`;
+  }
+
+  function renderClasses() {
+    const container = document.getElementById('classes-cards-grid');
+    container.innerHTML = appData.classes.map(cls => {
+      const enrolledCount = appData.preSales.filter(l => l.classId === cls.id && l.status === 'Đã chốt').length;
+
+      return `
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="text-xs font-bold font-mono bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-md uppercase">${cls.code}</span>
+                                    <h4 class="font-bold text-slate-800 text-lg mt-1">${cls.name}</h4>
+                                </div>
+                                <span class="text-xs bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full font-semibold">Đang mở</span>
+                            </div>
+                            <div class="mt-4 space-y-2 text-xs text-slate-600">
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-calendar-days text-indigo-500 w-4"></i> Lịch: ${cls.schedule}</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-chalkboard-user text-indigo-500 w-4"></i> Giảng viên: ${cls.trainer}</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-tag text-indigo-500 w-4"></i> Học phí: ${cls.tuition.toLocaleString('vi-VN')} VNĐ</div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
+                            <span class="text-xs text-slate-500">Sĩ số hiện tại:</span>
+                            <span class="text-sm font-bold text-indigo-600">${enrolledCount} học viên</span>
+                        </div>
+                    </div>
+                `;
+    }).join('');
+  }
+
+  function renderStudentAttendance() {
+    const classSelect = document.getElementById('attendance-class-select');
+    const selectedClassId = classSelect.value || (appData.classes[0] ? appData.classes[0].id : '');
+    const selectedDate = document.getElementById('attendance-date').value;
+
+    const selectedClass = appData.classes.find(c => c.id === selectedClassId);
+    if (!selectedClass) return;
+
+    document.getElementById('attendance-class-title').innerText = `Điểm Danh Lớp: ${selectedClass.name} (${selectedClass.code})`;
+
+    const enrolledStudents = appData.preSales.filter(l => l.classId === selectedClassId && l.status === 'Đã chốt');
+    const tbody = document.getElementById('student-attendance-table-body');
+
+    const dateKey = `${selectedClassId}_${selectedDate}`;
+    const existingAttendance = appData.studentAttendance[dateKey] || {};
+
+    if (enrolledStudents.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-400">Chưa có học viên nào xếp vào lớp này.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = enrolledStudents.map((st, index) => {
+      const attStatus = existingAttendance[st.id] || 'CoMat';
+
+      return `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="p-3 text-xs font-semibold text-slate-400">${index + 1}</td>
+                        <td class="p-3 font-bold text-slate-800">${st.name}</td>
+                        <td class="p-3 font-mono text-xs text-indigo-600">${st.phone}</td>
+                        <td class="p-3 text-center">
+                            <div class="inline-flex rounded-xl bg-slate-100 p-1 border border-slate-200">
+                                <label class="px-3 py-1 text-xs font-medium rounded-lg cursor-pointer ${attStatus === 'CoMat' ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600'}">
+                                    <input type="radio" name="att_${st.id}" value="CoMat" ${attStatus === 'CoMat' ? 'checked' : ''} class="hidden" onchange="updateRadioStyle(this)"> Có Mặt
+                                </label>
+                                <label class="px-3 py-1 text-xs font-medium rounded-lg cursor-pointer ${attStatus === 'Vang' ? 'bg-rose-600 text-white shadow-sm' : 'text-slate-600'}">
+                                    <input type="radio" name="att_${st.id}" value="Vang" ${attStatus === 'Vang' ? 'checked' : ''} class="hidden" onchange="updateRadioStyle(this)"> Vắng
+                                </label>
+                            </div>
+                        </td>
+                        <td class="p-3">
+                            <input type="text" id="note_${st.id}" placeholder="Ghi chú (đi trễ, nghỉ có phép)..." value="${existingAttendance[st.id + '_note'] || ''}" class="w-full border border-slate-200 rounded-lg px-2 py-1 text-xs focus:outline-none">
+                        </td>
+                    </tr>
+                `;
+    }).join('');
+  }
+
+  function saveStudentAttendance() {
+    const classId = document.getElementById('attendance-class-select').value;
+    const dateStr = document.getElementById('attendance-date').value;
+    const dateKey = `${classId}_${dateStr}`;
+
+    const enrolledStudents = appData.preSales.filter(l => l.classId === classId && l.status === 'Đã chốt');
+    const attObj = {};
+
+    enrolledStudents.forEach(st => {
+      const radios = document.getElementsByName(`att_${st.id}`);
+      let val = 'CoMat';
+      radios.forEach(r => { if (r.checked) val = r.value; });
+      attObj[st.id] = val;
+
+      const noteInput = document.getElementById(`note_${st.id}`);
+      if (noteInput) attObj[st.id + '_note'] = noteInput.value;
+    });
+
+    appData.studentAttendance[dateKey] = attObj;
+    saveToLocalStorage();
+    alert('Đã lưu dữ liệu điểm danh thành công!');
+  }
+
+  function renderEmployees() {
+    const tbody = document.getElementById('employees-table-body');
+    tbody.innerHTML = appData.employees.map(emp => `
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="p-4 font-mono font-bold text-slate-500">${emp.id}</td>
+                    <td class="p-4 font-bold text-slate-800">${emp.name}</td>
+                    <td class="p-4 text-xs font-semibold text-indigo-700 bg-indigo-50/50 rounded-xl">${emp.position}</td>
+                    <td class="p-4 font-mono text-xs text-slate-600">${emp.phone}</td>
+                    <td class="p-4 font-bold text-slate-800">${emp.salary.toLocaleString('vi-VN')} VNĐ</td>
+                    <td class="p-4 font-bold text-indigo-600">${((emp.commissionRate || 0) * 100)}%</td>
+                    <td class="p-4 text-center">
+                        <button onclick="deleteEmployee('${emp.id}')" title="Xóa" class="text-slate-400 hover:text-rose-600 p-1">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+  }
+
+  function renderStaffTimekeeping() {
+    const dateStr = document.getElementById('staff-attendance-date').value;
+    const tbody = document.getElementById('staff-timekeeping-table-body');
+    const existingTimekeeping = appData.staffAttendance[dateStr] || {};
+
+    tbody.innerHTML = appData.employees.map((emp) => {
+      const status = existingTimekeeping[emp.id] || 'DiLam';
+      const note = existingTimekeeping[emp.id + '_note'] || '';
+
+      return `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="p-4 font-mono font-bold text-slate-500 text-xs">${emp.id}</td>
+                        <td class="p-4 font-bold text-slate-800">${emp.name}</td>
+                        <td class="p-4 text-xs text-slate-600">${emp.position}</td>
+                        <td class="p-4 text-center">
+                            <select id="staff_status_${emp.id}" class="border border-slate-200 rounded-xl px-3 py-1.5 text-xs bg-white font-medium">
+                                <option value="DiLam" ${status === 'DiLam' ? 'selected' : ''}>Đi Làm Đủ</option>
+                                <option value="NghiPhep" ${status === 'NghiPhep' ? 'selected' : ''}>Nghỉ Có Phép</option>
+                                <option value="NghiKhongPhep" ${status === 'NghiKhongPhep' ? 'selected' : ''}>Nghỉ Không Phép</option>
+                            </select>
+                        </td>
+                        <td class="p-4 text-xs font-mono text-slate-500">08:30 AM</td>
+                        <td class="p-4">
+                            <input type="text" id="staff_note_${emp.id}" value="${note}" placeholder="Ghi chú..." class="w-full border border-slate-200 rounded-lg px-2 py-1 text-xs">
+                        </td>
+                    </tr>
+                `;
+    }).join('');
+  }
+
+  function saveStaffTimekeeping() {
+    const dateStr = document.getElementById('staff-attendance-date').value;
+    const recordObj = {};
+
+    appData.employees.forEach(emp => {
+      const statusSelect = document.getElementById(`staff_status_${emp.id}`);
+      const noteInput = document.getElementById(`staff_note_${emp.id}`);
+      if (statusSelect) recordObj[emp.id] = statusSelect.value;
+      if (noteInput) recordObj[emp.id + '_note'] = noteInput.value;
+    });
+
+    appData.staffAttendance[dateStr] = recordObj;
+    saveToLocalStorage();
+    alert('Đã lưu chấm công nhân viên!');
+  }
+
+  function calculatePIT(taxableIncome) {
+    // Progressive tax brackets in Vietnam Law (Lũy tiến từng phần)
+    if (taxableIncome <= 0) return 0;
+    if (taxableIncome <= 5000000) return taxableIncome * 0.05;
+    if (taxableIncome <= 10000000) return taxableIncome * 0.10 - 250000;
+    if (taxableIncome <= 18000000) return taxableIncome * 0.15 - 750000;
+    if (taxableIncome <= 32000000) return taxableIncome * 0.20 - 1650000;
+    if (taxableIncome <= 52000000) return taxableIncome * 0.25 - 3250000;
+    if (taxableIncome <= 80000000) return taxableIncome * 0.30 - 5850000;
+    return taxableIncome * 0.35 - 9850000;
+  }
+
+  function renderPayroll() {
+    const tbody = document.getElementById('payroll-table-body');
+
+    tbody.innerHTML = appData.employees.map(emp => {
+      // 1. Sales revenue by employee
+      const salesRevenue = appData.preSales
+        .filter(l => l.seller === emp.name && l.status === 'Đã chốt')
+        .reduce((s, l) => s + (l.revenue || 0), 0);
+
+      // 2. Commission 3%
+      const commission = salesRevenue * (emp.commissionRate || 0);
+
+      // 3. Gross Income = Base Salary + Commission
+      const grossIncome = emp.salary + commission;
+
+      // 4. Social Insurance Deductions (Bảo hiểm 10.5% tính trên Lương cơ bản)
+      const bhxh = emp.salary * 0.08;
+      const bhtn = emp.salary * 0.01;
+      const bhyt = emp.salary * 0.015;
+      const totalInsurance = bhxh + bhtn + bhyt; // 10.5%
+
+      // 5. Personal Tax Relief (Giảm trừ gia cảnh: 15,500,000 bản thân + 6,200,000 / người phụ thuộc)
+      const personalDeduction = 15500000;
+      const dependentDeduction = (emp.dependents || 0) * 6200000;
+      const totalRelief = personalDeduction + dependentDeduction;
+
+      // 6. Taxable Income (Thu nhập tính thuế)
+      const taxableIncome = Math.max(0, grossIncome - totalInsurance - totalRelief);
+
+      // 7. Personal Income Tax (Thuế TNCN)
+      const pitTax = calculatePIT(taxableIncome);
+
+      // 8. Net Salary Received (Lương nhận về)
+      const netSalary = grossIncome - totalInsurance - pitTax;
+
+      return `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="p-4 font-bold text-slate-800">
+                            <div>${emp.name}</div>
+                            <div class="text-xs text-slate-400 font-normal">${emp.position}</div>
+                        </td>
+                        <td class="p-4 text-xs font-semibold text-slate-700">${emp.salary.toLocaleString('vi-VN')} VNĐ</td>
+                        <td class="p-4 text-xs font-semibold text-emerald-600">${salesRevenue.toLocaleString('vi-VN')} VNĐ</td>
+                        <td class="p-4 text-xs font-bold text-indigo-600">+${commission.toLocaleString('vi-VN')} VNĐ</td>
+                        <td class="p-4 text-xs font-bold text-slate-900">${grossIncome.toLocaleString('vi-VN')} VNĐ</td>
+                        <td class="p-4 text-xs text-rose-600 font-semibold">-${Math.round(totalInsurance).toLocaleString('vi-VN')} VNĐ</td>
+                        <td class="p-4 text-xs text-amber-600 font-semibold">-${Math.round(pitTax).toLocaleString('vi-VN')} VNĐ</td>
+                        <td class="p-4 font-bold text-emerald-700 text-base text-right">${Math.round(netSalary).toLocaleString('vi-VN')} VNĐ</td>
+                        <td class="p-4 text-center">
+                            <button onclick="viewPayslipDetail('${emp.id}', ${grossIncome}, ${commission}, ${salesRevenue}, ${totalInsurance}, ${pitTax}, ${netSalary})" title="Xem phiếu lương" class="bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white px-2.5 py-1.5 rounded-xl text-xs font-medium transition">
+                                <i class="fa-solid fa-file-lines"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+    }).join('');
+  }
+
+  function openModal(id) {
+    document.getElementById(id).classList.remove('hidden');
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.add('hidden');
+  }
+
+  function toggleRejectionReasonInput() {
+    const status = document.getElementById('lead-input-status').value;
+    const container = document.getElementById('rejection-reason-container');
+    if (status === 'Từ chối') {
+      container.classList.remove('hidden');
+    } else {
+      container.classList.add('hidden');
+    }
+  }
+
+  function handleSaveLead(event) {
+    event.preventDefault();
+    const newLead = {
+      id: 'lead-' + Date.now(),
+      name: document.getElementById('lead-input-name').value,
+      phone: document.getElementById('lead-input-phone').value,
+      source: document.getElementById('lead-input-source').value,
+      purpose: document.getElementById('lead-input-purpose').value,
+      who: document.getElementById('lead-input-who').value,
+      seller: document.getElementById('lead-input-seller').value,
+      status: document.getElementById('lead-input-status').value,
+      rejectionReason: document.getElementById('lead-input-rejection').value || '',
+      classId: '',
+      revenue: 0
+    };
+
+    appData.preSales.unshift(newLead);
+    saveToLocalStorage();
+    renderAllTabs();
+    closeModal('modal-add-lead');
+    event.target.reset();
+  }
+
+  function openConvertModal(leadId) {
+    const lead = appData.preSales.find(l => l.id === leadId);
+    if (!lead) return;
+
+    document.getElementById('convert-lead-id').value = lead.id;
+    document.getElementById('convert-lead-name').innerText = `${lead.name} (${lead.phone})`;
+
+    // Set default tuition amount from first class
+    if (appData.classes[0]) {
+      document.getElementById('convert-input-amount').value = appData.classes[0].tuition;
+    }
+
+    openModal('modal-convert-sale');
+  }
+
+  function handleConfirmSale(event) {
+    event.preventDefault();
+    const leadId = document.getElementById('convert-lead-id').value;
+    const classId = document.getElementById('convert-input-class').value;
+    const amount = parseFloat(document.getElementById('convert-input-amount').value);
+
+    const lead = appData.preSales.find(l => l.id === leadId);
+    if (lead) {
+      lead.status = 'Đã chốt';
+      lead.classId = classId;
+      lead.revenue = amount;
+      lead.rejectionReason = '';
+    }
+
+    saveToLocalStorage();
+    renderAllTabs();
+    closeModal('modal-convert-sale');
+  }
+
+  function handleSaveEmployee(event) {
+    event.preventDefault();
+    const newEmp = {
+      id: 'EMP' + String(appData.employees.length + 1).padStart(2, '0'),
+      name: document.getElementById('emp-input-name').value,
+      position: document.getElementById('emp-input-position').value,
+      phone: document.getElementById('emp-input-phone').value,
+      salary: parseFloat(document.getElementById('emp-input-salary').value),
+      commissionRate: parseFloat(document.getElementById('emp-input-commission').value) / 100,
+      dependents: 1
+    };
+
+    appData.employees.push(newEmp);
+    saveToLocalStorage();
+    populateDropdowns();
+    renderAllTabs();
+    closeModal('modal-add-employee');
+    event.target.reset();
+  }
+
+  function viewPayslipDetail(empId, gross, commission, salesRevenue, insurance, pit, net) {
+    const emp = appData.employees.find(e => e.id === empId);
+    if (!emp) return;
+
+    const html = `
+                <div class="space-y-4 text-sm">
+                    <div class="flex justify-between border-b pb-3">
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-base">${emp.name}</h4>
+                            <p class="text-xs text-slate-500">Chức vụ: ${emp.position} | SĐT: ${emp.phone}</p>
+                        </div>
+                        <span class="text-xs font-mono font-bold bg-slate-100 p-2 rounded-lg text-slate-700">${emp.id}</span>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-slate-600">Lương cơ bản:</span>
+                            <span class="font-bold">${emp.salary.toLocaleString('vi-VN')} VNĐ</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span class="text-slate-600">Doanh số Sales chốt:</span>
+                            <span class="font-bold text-emerald-600">${salesRevenue.toLocaleString('vi-VN')} VNĐ</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span class="text-slate-600">Hoa hồng bán hàng (3%):</span>
+                            <span class="font-bold text-indigo-600">+${commission.toLocaleString('vi-VN')} VNĐ</span>
+                        </div>
+                        <div class="flex justify-between font-bold text-slate-800 border-t pt-2">
+                            <span>TỔNG THU NHẬP GROSS:</span>
+                            <span>${gross.toLocaleString('vi-VN')} VNĐ</span>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-slate-50 rounded-xl space-y-1.5 text-xs">
+                        <div class="font-semibold text-slate-700 mb-1">Các Khoản Trừ Theo Quy Định (TopCV):</div>
+                        <div class="flex justify-between text-slate-600">
+                            <span>- Bảo hiểm XH, TN, Y Tế (10.5%):</span>
+                            <span class="text-rose-600">-${Math.round(insurance).toLocaleString('vi-VN')} VNĐ</span>
+                        </div>
+                        <div class="flex justify-between text-slate-600">
+                            <span>- Thuế Thu Nhập Cá Nhân (TNCN):</span>
+                            <span class="text-amber-600">-${Math.round(pit).toLocaleString('vi-VN')} VNĐ</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 flex justify-between items-center">
+                        <span class="font-bold text-emerald-900 text-sm">LƯƠNG THỰC NHẬN (NET):</span>
+                        <span class="font-bold text-emerald-700 text-xl">${Math.round(net).toLocaleString('vi-VN')} VNĐ</span>
+                    </div>
+                </div>
+            `;
+
+    document.getElementById('payslip-detail-content').innerHTML = html;
+    openModal('modal-payslip-detail');
+  }
+
+  function deleteLead(id) {
+    if (confirm("Xóa khách hàng lead này khỏi hệ thống?")) {
+      appData.preSales = appData.preSales.filter(l => l.id !== iad);
+      saveToLocalStorage();
+      renderAllTabs();
+    }
+  }
+
+  function deleteEmployee(id) {
+    if (confirm("Xóa nhân viên này?")) {
+      appData.employees = appData.employees.filter(e => e.id !== id);
+      saveToLocalStorage();
+      populateDropdowns();
+      renderAllTabs();
+    }
+  }
+
+  function updateRadioStyle(input) {
+    const name = input.name;
+    document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+      const label = r.parentElement;
+      label.classList.remove('bg-emerald-600', 'bg-rose-600', 'text-white', 'shadow-sm');
+      label.classList.add('text-slate-600');
+    });
+
+    const currentLabel = input.parentElement;
+    if (input.value === 'CoMat') {
+      currentLabel.classList.add('bg-emerald-600', 'text-white', 'shadow-sm');
+    } else {
+      currentLabel.classList.add('bg-rose-600', 'text-white', 'shadow-sm');
+    }
+  }
+</script>
+</body>
+</html>
