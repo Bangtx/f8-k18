@@ -3,6 +3,8 @@ services:
     container_name: 'f8-k18-express'
     image: node:24.0.0-alpine
     working_dir: /app/api
+    env_file:
+      - .env
     ports:
       - '3000:3000'
     volumes:
@@ -20,3 +22,15 @@ services:
       POSTGRES_DB: default
     volumes:
       - './db:/var/lib/postgresql/data'
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: f8-k18-mailhog
+    volumes:
+      - ./mail:/maildir:cached
+    environment:
+      - MH_STORAGE=maildir
+      - MH_MAILDIR_PATH=/maildir
+    ports:
+      - "1027:1025"
+      - "8027:8025"

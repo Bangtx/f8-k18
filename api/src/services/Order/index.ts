@@ -5,6 +5,7 @@ import {InsertResult, SelectQueryBuilder} from "typeorm";
 import {AppDataSource} from "../../config/database";
 import {CustomerEntity} from "../../entities/CustomerEntity";
 import {Transactional} from "typeorm-transactional";
+import {fMail} from '../FMail'
 
 export class OrderService extends BaseService {
 
@@ -49,9 +50,9 @@ export class OrderService extends BaseService {
 
     const orderId = newOrder.raw[0].id
 
-    if (orderId) {
-      throw new Error('BROKEN');
-    }
+    // if (orderId) {
+    //   throw new Error('BROKEN');
+    // }
 
     const details = order.details.map(od => {
       return {...od, orderId}
@@ -60,6 +61,9 @@ export class OrderService extends BaseService {
     await orderDetailService.createMany(details)
 
     const result = (await this.getList({id: orderId}))[0]
+
+    await fMail.send()
+
     return result
   }
 
